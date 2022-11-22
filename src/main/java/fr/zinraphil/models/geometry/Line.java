@@ -21,6 +21,18 @@ public class Line extends Shape<Line> implements AxialSymmetryShape {
         return p2;
     }
 
+    public double length() {
+        return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
+    }
+    
+    public double area() {
+        return 0;
+    }
+
+    public double perimeter() {
+        return length();
+    }
+
     @Override
     public int compareTo(Line o) {
         if (this.p1.compareTo(o.getP1()) != 0) return this.p1.compareTo(o.getP1());

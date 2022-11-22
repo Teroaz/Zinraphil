@@ -43,6 +43,14 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape {
         return azimuth;
     }
 
+    public double area() {
+        return Math.PI * radiusX * radiusY;
+    }
+
+    public double perimeter() {
+        return 2 * Math.PI * Math.sqrt((radiusX * radiusX + radiusY * radiusY) / 2);
+    }
+
     @Override
     public int compareTo(Ellipsis o) {
         if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());

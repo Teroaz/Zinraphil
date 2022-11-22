@@ -17,6 +17,28 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape {
         return points;
     }
 
+    public double area() {
+        // Calculate the are of a polygon using the Shoelace formula
+        // https://en.wikipedia.org/wiki/Shoelace_formula
+        double area = 0;
+        for (int i = 0; i < points.size(); i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i + 1) % points.size());
+            area += p1.getX() * p2.getY() - p2.getX() * p1.getY();
+        }
+        return Math.abs(area) / 2;
+    }
+
+    public double perimeter() {
+        double perimeter = 0;
+        for (int i = 0; i < points.size(); i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i + 1) % points.size());
+            perimeter += Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
+        }
+        return perimeter;
+    }
+
     @Override
     public int compareTo(Polygon o) {
 
