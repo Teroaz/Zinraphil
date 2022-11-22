@@ -31,4 +31,7 @@ public class Circle extends Shape<Circle> {
         if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
         return this.radius - o.getRadius();
     }
+    public void translation(int deltaX, int deltaY) {
+        this.center.translation(deltaX, deltaY);
+    }
 }

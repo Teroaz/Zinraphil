@@ -25,4 +25,8 @@ public class Angle implements Comparable<Angle> {
     public int compareTo(Angle o) {
         return this.getRadian() - o.getRadian();
     }
+
+    public Angle add(Angle angle) {
+        return new Angle(AngleType.RADIAN, this.getRadian() + angle.getRadian());
+    }
 }

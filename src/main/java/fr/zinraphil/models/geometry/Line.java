@@ -1,9 +1,12 @@
 package fr.zinraphil.models.geometry;
 
+import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
 import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
-public class Line extends Shape<Line> implements AxialSymmetryShape {
+import static java.lang.Math.cos;
+
+public class Line extends Shape<Line> implements AxialSymmetryShape, IRotation {
 
     private Point p1;
     private Point p2;
@@ -33,6 +36,7 @@ public class Line extends Shape<Line> implements AxialSymmetryShape {
         return length();
     }
 
+
     @Override
     public int compareTo(Line o) {
         if (this.p1.compareTo(o.getP1()) != 0) return this.p1.compareTo(o.getP1());
@@ -48,5 +52,23 @@ public class Line extends Shape<Line> implements AxialSymmetryShape {
             p1.setX(-p1.getX());
             p2.setX(-p2.getX());
         }
+    }
+
+    public void translation(int deltaX,int deltaY) {
+        p1.translation(deltaX, deltaY);
+        p2.translation(deltaX, deltaY);
+    }
+
+    @Override
+    public void rotation(Angle angle , int x1 , int y1) {
+        x1= p1*cos(angle.getAngle());
+
+
+
+
+}
+
+
+
     }
 }

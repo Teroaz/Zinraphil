@@ -1,5 +1,7 @@
 package fr.zinraphil.models.geometry;
 
+import fr.zinraphil.models.geometry.angle.Angle;
+
 public class Point implements Comparable<Point> {
 
     private int x;
@@ -32,4 +34,10 @@ public class Point implements Comparable<Point> {
     public void setY(int y) {
         this.y = y;
     }
-}
+
+    public void translation(int deltaX, int deltaY) {
+        this.x += deltaX;
+        this.y += deltaY;
+    }
+
+
