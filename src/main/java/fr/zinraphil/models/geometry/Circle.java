@@ -1,6 +1,8 @@
 package fr.zinraphil.models.geometry;
 
-public class Circle extends Shape<Circle> {
+import java.awt.*;
+
+public class Circle extends Shape<Circle> implements IDrawable{
 
     private Point center;
     private int radius;
@@ -30,5 +32,10 @@ public class Circle extends Shape<Circle> {
     public int compareTo(Circle o) {
         if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
         return this.radius - o.getRadius();
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawOval(center.getX() - radius, center.getY() - radius, radius * 2, radius * 2);
     }
 }

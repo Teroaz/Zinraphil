@@ -18,12 +18,4 @@ public class Fresco {
         images.put(point, image);
     }
 
-    public void removeImage(Point point) {
-        images.remove(point);
-    }
-
-    public Image getImage(Point point) {
-        return images.get(point);
-    }
-
 }
