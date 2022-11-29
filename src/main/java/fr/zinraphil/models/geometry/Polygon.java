@@ -1,11 +1,14 @@
 package fr.zinraphil.models.geometry;
 
+import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
 import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.util.ArrayList;
 
-public class Polygon extends Shape<Polygon> implements AxialSymmetryShape {
+import static java.lang.Math.cos;
+
+public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation ,Isymetrieaxiale,Isymetriecentrale{
 
     private ArrayList<Point> points;
 
@@ -63,4 +66,42 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape {
             }
         }
     }
+
+    @Override
+    public void rotation(Angle angle) {
+        for (int i = 0; i < points.size(); i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i + 1) % points.size());
+
+            p2.setX((int) (p2.getX() * cos(angle.getDegree())));
+            p2.setY((int) (p2.getY() * cos(angle.getDegree())));
+
+
+        }
+    }
+
+    @Override
+    public void translation(int deltaX, int deltaY) {
+        for (Point p : this.points) {
+            p.translation(deltaX, deltaY);
+        }
+    }
+
+    @Override
+    public void symetrieaxiale() {
+        for (Point p : this.points) {
+            p.setX(-p.getX());
+            p.setY(-p.getY());
+        }
+    }
+
+    @Override
+    public void symetriecentrale() {
+        for (Point p : this.points) {
+            p.setX(-p.getX());
+            p.setY(-p.getY());
+        }
+    }
 }
+
+

@@ -6,7 +6,7 @@ import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation {
+public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
 
     private final Point center;
     private final int radiusX;
@@ -78,4 +78,16 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
         this.center.translation(deltaX, deltaY);
     }
 
+    @Override
+    public void symetrieaxiale() {
+
+
+
+    }
+
+    @Override
+    public void symetriecentrale() {
+
+
+    }
 }

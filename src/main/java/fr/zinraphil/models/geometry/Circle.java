@@ -2,7 +2,9 @@ package fr.zinraphil.models.geometry;
 
 import java.awt.*;
 
-public class Circle extends Shape<Circle> implements IDrawable{
+import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
+
+public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Isymetrieaxiale {
 
     private Point center;
     private int radius;
@@ -40,5 +42,13 @@ public class Circle extends Shape<Circle> implements IDrawable{
     @Override
     public void draw(Graphics g) {
         g.drawOval(center.getX() - radius, center.getY() - radius, radius * 2, radius * 2);
+    }
+
+    @Override
+    public void symetrieaxiale() {
+      // creating a line as the symmetry axis
+        Line line = new Line(new Point(IMAGE_SIZE / 2, 0), new Point(IMAGE_SIZE / 2, IMAGE_SIZE));
+        // SYMMETERY OF THE CIRCLE WITH RESPECT TO THE AXIS
+
     }
 }
