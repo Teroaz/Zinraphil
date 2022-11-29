@@ -14,7 +14,7 @@ public class JFrameUtils {
     public static Point centerFrameCoords(int width, int height) {
         GraphicsDevice ge = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int screenWidth = ge.getDisplayMode().getWidth();
-        int screenHeight = ge.getDisplayMode().getHeight();
+        int screenHeight = ge.getDisplayMode().getHeight() - 50;
 
         return new Point((screenWidth - width) / 2, (screenHeight - height) / 2);
     }

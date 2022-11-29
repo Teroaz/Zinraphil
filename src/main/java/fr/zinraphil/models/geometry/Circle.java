@@ -1,6 +1,8 @@
 package fr.zinraphil.models.geometry;
 
-public class Circle extends Shape<Circle> {
+import java.awt.*;
+
+public class Circle extends Shape<Circle> implements IDrawable{
 
     private Point center;
     private int radius;
@@ -33,5 +35,10 @@ public class Circle extends Shape<Circle> {
     }
     public void translation(int deltaX, int deltaY) {
         this.center.translation(deltaX, deltaY);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawOval(center.getX() - radius, center.getY() - radius, radius * 2, radius * 2);
     }
 }
