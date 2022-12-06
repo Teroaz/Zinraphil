@@ -5,7 +5,7 @@ import fr.zinraphil.models.geometry.Point;
 import java.util.HashMap;
 
 public class Fresco {
-    private HashMap<Point, Image> images = new HashMap<>();
+    private final HashMap<Point, Image> images = new HashMap<>();
 
     public Fresco() {
     }

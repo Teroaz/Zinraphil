@@ -1,30 +1,39 @@
 package fr.zinraphil.controllers;
 
-import fr.zinraphil.models.geometry.Shape;
 import fr.zinraphil.views.control.ControlPanel;
+import fr.zinraphil.views.control.subcontrol.AbstractSubControlPanel;
 
 public class ControlController {
     private static ControlController instance = null;
 
-    private static ControlPanel controlPanel;
+    private final ControlPanel controlPanel;
 
-    private static Shape currentShape;
+    private AbstractSubControlPanel subControlPanel;
 
     public ControlController(ControlPanel controlPanel) {
         instance = this;
 
-        ControlController.controlPanel = controlPanel;
+        this.controlPanel = controlPanel;
 
     }
 
     public static ControlController getInstance() {
         if (instance == null) {
-            instance = new ControlController(controlPanel);
+            throw new RuntimeException("ControlController not initialized");
         }
         return instance;
     }
 
-    public void update() {
-        controlPanel.updateUI();
+    public ControlPanel getControlPanel() {
+        return controlPanel;
+    }
+
+    public AbstractSubControlPanel getSubControlPanel() {
+        return subControlPanel;
+    }
+
+    public void setSubControlPanel(AbstractSubControlPanel subControlPanel) {
+        this.subControlPanel = subControlPanel;
     }
 }
+

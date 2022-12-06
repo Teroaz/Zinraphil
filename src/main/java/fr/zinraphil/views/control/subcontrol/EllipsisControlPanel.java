@@ -1,4 +1,4 @@
-package fr.zinraphil.views.control;
+package fr.zinraphil.views.control.subcontrol;
 
 import javax.swing.*;
 

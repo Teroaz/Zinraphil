@@ -6,12 +6,12 @@ public class FrescoController {
 
     private static FrescoController instance = null;
 
-    private static FrescoPanel frescoPanel;
+    private final FrescoPanel frescoPanel;
 
 
     public FrescoController(FrescoPanel frescoPanel) {
         instance = this;
-        FrescoController.frescoPanel = frescoPanel;
+        this.frescoPanel = frescoPanel;
     }
 
     public static FrescoController getInstance() {
@@ -21,7 +21,7 @@ public class FrescoController {
         return instance;
     }
 
-    public static FrescoPanel getFrescoPanel() {
+    public FrescoPanel getFrescoPanel() {
         return frescoPanel;
     }
 

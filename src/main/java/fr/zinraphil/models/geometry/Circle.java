@@ -51,4 +51,8 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
         // SYMMETERY OF THE CIRCLE WITH RESPECT TO THE AXIS
 
     }
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
 }

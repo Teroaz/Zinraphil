@@ -2,6 +2,7 @@ package fr.zinraphil.views;
 
 import fr.zinraphil.controllers.ControlController;
 import fr.zinraphil.controllers.FrescoController;
+import fr.zinraphil.controllers.ImageController;
 import fr.zinraphil.models.geometry.Point;
 import fr.zinraphil.models.patchwork.Fresco;
 import fr.zinraphil.models.patchwork.Image;
@@ -52,6 +53,8 @@ public class ZinraphilFrame extends JFrame {
                 }
             }
 
+            new ImageController();
+
             FrescoPanel frescoPanel = new FrescoPanel(fresco);
             frescoPanel.setPreferredSize(new Dimension(HEIGHT, HEIGHT));
             new FrescoController(frescoPanel);
@@ -59,6 +62,7 @@ public class ZinraphilFrame extends JFrame {
             ControlPanel controlPanel = new ControlPanel();
             controlPanel.setPreferredSize(new Dimension(WIDTH - HEIGHT, HEIGHT));
             new ControlController(controlPanel);
+
 
             JPanel contentPanePanel = new JPanel();
             contentPanePanel.setSize(WIDTH, HEIGHT);
@@ -73,7 +77,6 @@ public class ZinraphilFrame extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 }

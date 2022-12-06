@@ -31,6 +31,7 @@ public class Image {
     }
 
     public void addShape(Shape shape) {
+        // TODO: check if shape is in image
         shapes.add(shape);
     }
 

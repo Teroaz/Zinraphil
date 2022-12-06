@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class FrescoPanel extends JPanel {
 
-    private Fresco fresco;
+    private final Fresco fresco;
 
-    private ArrayList<ImagePanel> imagePanels = new ArrayList<>();
+    private final ArrayList<ImagePanel> imagePanels = new ArrayList<>();
 
     public FrescoPanel(Fresco fresco) {
         super();
@@ -22,11 +22,11 @@ public class FrescoPanel extends JPanel {
         fresco.getImages().forEach((point, image) -> {
             ImagePanel imagePanel = new ImagePanel(image);
             imagePanel.addMouseListener(ImageController.getInstance());
+            imagePanel.addMouseMotionListener(ImageController.getInstance());
             imagePanel.setLocation(point.getX(), point.getY());
             this.imagePanels.add(imagePanel);
         });
 
-//        this.addMouseListener();
         this.imagePanels.forEach(this::add);
     }
 
