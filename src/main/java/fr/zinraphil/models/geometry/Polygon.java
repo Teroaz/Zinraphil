@@ -1,14 +1,12 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.util.ArrayList;
 
 import static java.lang.Math.cos;
 
-public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation ,Isymetrieaxiale,Isymetriecentrale{
+public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
 
     private ArrayList<Point> points;
 
@@ -43,28 +41,19 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
     }
 
     @Override
-    public int compareTo(Polygon o) {
+    public int compareTo(Shape o) {
+        if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
 
+        Polygon p = (Polygon) o;
         int samePoints = 0;
-        if (this.points.size() != o.getPoints().size()) return this.points.size() - o.getPoints().size();
-        for (Point p : this.points) {
-            for (Point p2 : o.getPoints()) {
-                if (p.compareTo(p2) == 0) samePoints++;
+        if (this.points.size() != p.getPoints().size()) return this.points.size() - p.getPoints().size();
+        for (Point p1 : this.points) {
+            for (Point p2 : p.getPoints()) {
+                if (p1.compareTo(p2) == 0) samePoints++;
             }
         }
 
         return samePoints - this.points.size();
-    }
-
-    @Override
-    public void applyAxialSymmetry(Axis axis) {
-        for (Point p : this.points) {
-            if (axis == Axis.X) {
-                p.setY(-p.getY());
-            } else if (axis == Axis.Y) {
-                p.setX(-p.getX());
-            }
-        }
     }
 
     @Override
@@ -101,6 +90,13 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
             p.setX(-p.getX());
             p.setY(-p.getY());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Polygon{" +
+                "points=" + points +
+                '}';
     }
 }
 

@@ -1,8 +1,6 @@
 package fr.zinraphil.models.geometry;
 
-import fr.zinraphil.models.geometry.angle.Angle;
-
-public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
+public class Point implements Comparable<Point>, ITranslation, Isymetrieaxiale {
 
     private int x;
     private int y;
@@ -44,6 +42,14 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
     public void symetrieaxiale() {
         this.x = -this.x;
         this.y = -this.y;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
 

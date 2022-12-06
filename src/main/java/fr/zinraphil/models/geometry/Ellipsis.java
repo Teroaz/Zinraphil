@@ -1,14 +1,12 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.awt.*;
 
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDrawable, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Ellipsis extends Shape<Ellipsis> implements IDrawable, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
 
     private final Point center;
     private final int radiusX;
@@ -17,7 +15,7 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDr
     private Angle azimuth = new Angle(DEGREE, 0);
 
     public Ellipsis(Point center, int radiusX, int radiusY) {
-        if (radiusX==radiusY){
+        if (radiusX == radiusY) {
             throw new IllegalArgumentException("The radiusX and radiusY must be different");
         }
         this.center = center;
@@ -55,17 +53,15 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDr
     }
 
     @Override
-    public int compareTo(Ellipsis o) {
-        if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
-        if (this.radiusX != o.getRadiusX()) return this.radiusX - o.getRadiusX();
-        if (this.radiusY != o.getRadiusY()) return this.radiusY - o.getRadiusY();
+    public int compareTo(Shape o) {
+        if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
 
-        return this.azimuth.compareTo(o.getAzimuth());
-    }
+        Ellipsis e = (Ellipsis) o;
+        if (this.center.compareTo(e.getCenter()) != 0) return this.center.compareTo(e.getCenter());
+        if (this.radiusX != e.getRadiusX()) return this.radiusX - e.getRadiusX();
+        if (this.radiusY != e.getRadiusY()) return this.radiusY - e.getRadiusY();
 
-    @Override
-    public void applyAxialSymmetry(Axis axis) {
-
+        return this.azimuth.compareTo(e.getAzimuth());
     }
 
     @Override
@@ -89,12 +85,21 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDr
     public void symetrieaxiale() {
 
 
-
     }
 
     @Override
     public void symetriecentrale() {
 
 
+    }
+
+    @Override
+    public String toString() {
+        return "Ellipsis{" +
+                "center=" + center +
+                ", radiusX=" + radiusX +
+                ", radiusY=" + radiusY +
+                ", azimuth=" + azimuth +
+                '}';
     }
 }

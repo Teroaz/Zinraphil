@@ -1,14 +1,12 @@
 package fr.zinraphil.controllers;
 
 import fr.zinraphil.views.control.ControlPanel;
-import fr.zinraphil.views.control.subcontrol.AbstractSubControlPanel;
 
 public class ControlController {
     private static ControlController instance = null;
 
     private final ControlPanel controlPanel;
 
-    private AbstractSubControlPanel subControlPanel;
 
     public ControlController(ControlPanel controlPanel) {
         instance = this;
@@ -28,12 +26,5 @@ public class ControlController {
         return controlPanel;
     }
 
-    public AbstractSubControlPanel getSubControlPanel() {
-        return subControlPanel;
-    }
-
-    public void setSubControlPanel(AbstractSubControlPanel subControlPanel) {
-        this.subControlPanel = subControlPanel;
-    }
 }
 

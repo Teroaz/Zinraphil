@@ -29,4 +29,12 @@ public class Angle implements Comparable<Angle> {
     public Angle add(Angle angle) {
         return new Angle(AngleType.RADIAN, this.getRadian() + angle.getRadian());
     }
+
+    @Override
+    public String toString() {
+        return "Angle{" +
+                "value=" + value +
+                ", type=" + type +
+                '}';
+    }
 }

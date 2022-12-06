@@ -32,6 +32,7 @@ public class Image {
 
     public void addShape(Shape shape) {
         // TODO: check if shape is in image
+        System.out.println("Adding shape " + shape);
         shapes.add(shape);
     }
 
@@ -45,5 +46,14 @@ public class Image {
 
     public TreeSet<Shape> sortArea() {
         return shapes.stream().sorted(Comparator.comparingDouble(Shape::area)).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "width=" + width +
+                ", height=" + height +
+                ", shapes=" + shapes +
+                '}';
     }
 }

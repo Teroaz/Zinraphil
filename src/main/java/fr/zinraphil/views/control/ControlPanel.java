@@ -1,23 +1,23 @@
 package fr.zinraphil.views.control;
 
-import fr.zinraphil.controllers.ControlController;
 import fr.zinraphil.controllers.ImageController;
-import fr.zinraphil.views.control.subcontrol.AbstractSubControlPanel;
-import fr.zinraphil.views.control.subcontrol.CircleControlPanel;
+import fr.zinraphil.models.geometry.Circle;
+import fr.zinraphil.models.geometry.Line;
+import fr.zinraphil.models.geometry.Point;
+import fr.zinraphil.models.geometry.Shape;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
-import java.util.Objects;
+import java.util.Random;
+
+import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
 public class ControlPanel extends JPanel {
 
-    private JButton currentShapeButton;
     private final JPanel shapesPanel;
     private final JLabel selectAnImageLabel;
-
-    private AbstractSubControlPanel subControlPanel;
 
     public ControlPanel() {
         super();
@@ -44,40 +44,28 @@ public class ControlPanel extends JPanel {
 
         shapesPanel.setVisible(false);
         this.add(shapesPanel);
-
-    }
-
-    public void reset() {
-        if (subControlPanel != null) {
-            this.remove(subControlPanel);
-        }
-        currentShapeButton = null;
-        subControlPanel = null;
-
-        this.updateUI();
     }
 
     private void onClick(ActionEvent itemEvent, JButton button) {
 
-        if (currentShapeButton != null && Objects.equals(button.getText(), currentShapeButton.getText())) {
-            return;
-        }
-
-        currentShapeButton = button;
-
-        if (subControlPanel != null) this.remove(subControlPanel);
-
         System.out.println("Click on " + button.getText());
-        switch (currentShapeButton.getText()) {
-            case "Cercle" -> subControlPanel = new CircleControlPanel();
-//            case "Ellipse" -> subControlPanel = new EllipsisControlPanel();
-//            case "Ligne" -> subControlPanel = new LineControlPanel();
-//            case "Polygone" -> subControlPanel = new PolygonControlPanel();
+
+        switch (button.getText()) {
+            case "Cercle" -> {
+                Random random = new Random();
+                int radius = random.nextInt(5, 50);
+                Shape shape = new Circle(new Point(random.nextInt(IMAGE_SIZE - radius), random.nextInt(IMAGE_SIZE - radius)), radius);
+
+                ImageController.getInstance().getCurrentImagePanel().getImage().addShape(shape);
+            }
+
+            case "Ligne" -> {
+                Random random = new Random();
+                Shape shape = new Line(new Point(random.nextInt(IMAGE_SIZE), random.nextInt(IMAGE_SIZE)), new Point(random.nextInt(IMAGE_SIZE), random.nextInt(IMAGE_SIZE)));
+
+                ImageController.getInstance().getCurrentImagePanel().getImage().addShape(shape);
+            }
         }
-
-
-        ControlController.getInstance().setSubControlPanel(subControlPanel);
-        this.add(subControlPanel);
 
         this.updateUI();
     }
@@ -101,16 +89,8 @@ public class ControlPanel extends JPanel {
         return shapesPanel;
     }
 
-    public JButton getCurrentShapeButton() {
-        return currentShapeButton;
-    }
-
     public JLabel getSelectAnImageLabel() {
         return selectAnImageLabel;
-    }
-
-    public AbstractSubControlPanel getSubControlPanel() {
-        return subControlPanel;
     }
 }
 

@@ -1,11 +1,9 @@
 package fr.zinraphil.views.fresco;
 
-import fr.zinraphil.controllers.ControlController;
 import fr.zinraphil.controllers.ImageController;
 import fr.zinraphil.models.geometry.IDrawable;
 import fr.zinraphil.models.geometry.Shape;
 import fr.zinraphil.models.patchwork.Image;
-import fr.zinraphil.views.control.subcontrol.AbstractSubControlPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,27 +25,29 @@ public class ImagePanel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
 
-        image.getShapes().stream().filter(s -> s instanceof IDrawable).forEach(s -> ((IDrawable) s).draw(g));
-
         drawReperes(g);
+
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(new BasicStroke(2));
+
+        for (Shape shape : image.getShapes()) {
+            Color color = new Color(shape.hashCode() & 0x00FFFFFF);
+            g2.setColor(color);
+
+            if (shape instanceof IDrawable) {
+                ((IDrawable) shape).draw(g2);
+            }
+        }
+
+        g2.setColor(Color.BLACK);
 
         if (this != ImageController.getInstance().getCurrentImagePanel()) {
             this.setBorder(null);
             return;
         }
 
-        g.setColor(Color.RED);
         this.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
-
-        AbstractSubControlPanel subControlPanel = ControlController.getInstance().getControlPanel().getSubControlPanel();
-        if (subControlPanel == null) return;
-
-        Shape selectionShape = subControlPanel.getShape();
-
-        g.setColor(Color.LIGHT_GRAY);
-        if (selectionShape instanceof IDrawable) {
-            ((IDrawable) selectionShape).draw(g);
-        }
     }
 
     private void drawReperes(Graphics g) {
@@ -58,5 +58,12 @@ public class ImagePanel extends JPanel {
 
     public Image getImage() {
         return image;
+    }
+
+    @Override
+    public String toString() {
+        return "ImagePanel{" +
+                "image=" + image +
+                '}';
     }
 }

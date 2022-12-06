@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
-public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Isymetrieaxiale {
+public class Circle extends Shape<Circle> implements IDrawable, ITranslation, Isymetrieaxiale {
 
     private Point center;
     private int radius;
@@ -31,10 +31,14 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
     }
 
     @Override
-    public int compareTo(Circle o) {
-        if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
-        return this.radius - o.getRadius();
+    public int compareTo(Shape o) {
+        if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
+
+        Circle c = (Circle) o;
+        if (this.center.compareTo(c.getCenter()) != 0) return this.center.compareTo(c.getCenter());
+        return this.radius - c.getRadius();
     }
+
     public void translation(int deltaX, int deltaY) {
         this.center.translation(deltaX, deltaY);
     }
@@ -46,7 +50,7 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
 
     @Override
     public void symetrieaxiale() {
-      // creating a line as the symmetry axis
+        // creating a line as the symmetry axis
         Line line = new Line(new Point(IMAGE_SIZE / 2, 0), new Point(IMAGE_SIZE / 2, IMAGE_SIZE));
         // SYMMETERY OF THE CIRCLE WITH RESPECT TO THE AXIS
 
@@ -54,5 +58,13 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
 
     public void setRadius(int radius) {
         this.radius = radius;
+    }
+
+    @Override
+    public String toString() {
+        return "Circle{" +
+                "center=" + center +
+                ", radius=" + radius +
+                '}';
     }
 }
