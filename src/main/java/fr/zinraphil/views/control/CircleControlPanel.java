@@ -8,7 +8,7 @@ public class CircleControlPanel extends JPanel {
         super();
 
         JLabel label = new JLabel("Panneau de cercle");
-        label.setFont(label.getFont().deriveFont(60f));
+        label.setFont(label.getFont().deriveFont(40f));
         this.add(label);
     }
 }

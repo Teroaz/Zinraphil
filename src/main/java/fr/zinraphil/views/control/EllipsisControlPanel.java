@@ -8,7 +8,7 @@ public class EllipsisControlPanel extends JPanel {
         super();
 
         JLabel label = new JLabel("Panneau d'ellipse");
-        label.setFont(label.getFont().deriveFont(60f));
+        label.setFont(label.getFont().deriveFont(40f));
         this.add(label);
     }
 }

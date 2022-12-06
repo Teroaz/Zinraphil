@@ -4,9 +4,11 @@ import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
 import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
+import java.awt.*;
+
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDrawable, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
 
     private final Point center;
     private final int radiusX;
@@ -64,6 +66,11 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
     @Override
     public void applyAxialSymmetry(Axis axis) {
 
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawOval(center.getX() - radiusX, center.getY() - radiusY, radiusX * 2, radiusY * 2);
     }
 
     @Override

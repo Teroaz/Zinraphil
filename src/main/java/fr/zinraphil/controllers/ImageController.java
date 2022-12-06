@@ -11,7 +11,7 @@ public class ImageController implements MouseListener {
 
     private static ImageController instance = null;
 
-    static ImagePanel currentImagePanel;
+    public static ImagePanel currentImagePanel;
 
     private ImageController() {
         instance = this;
@@ -39,6 +39,8 @@ public class ImageController implements MouseListener {
             if (currentImagePanel != null) {
                 currentImagePanel.setBorder(BorderFactory.createLineBorder(Color.RED, 5));
             }
+
+            ControlController.getInstance().update();
         }
     }
 
