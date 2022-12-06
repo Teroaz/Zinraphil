@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static java.lang.Math.cos;
 
-public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation ,Isymetrieaxiale,Isymetriecentrale{
+public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation ,Isymetriecentrale,Ihomothety{
 
     private ArrayList<Point> points;
 
@@ -69,13 +69,9 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
 
     @Override
     public void rotation(Angle angle) {
-        for (int i = 0; i < points.size(); i++) {
-            Point p1 = points.get(i);
-            Point p2 = points.get((i + 1) % points.size());
-
-            p2.setX((int) (p2.getX() * cos(angle.getDegree())));
-            p2.setY((int) (p2.getY() * cos(angle.getDegree())));
-
+          for (Point p : this.points) {
+                p.setX((int) (p.getX() * cos(angle.getRadian())));
+                p.setY((int) (p.getY() * cos(angle.getRadian())));
 
         }
     }
@@ -87,21 +83,26 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
         }
     }
 
+
+
     @Override
-    public void symetrieaxiale() {
+    public void homothety(float k) {
         for (Point p : this.points) {
-            p.setX(-p.getX());
-            p.setY(-p.getY());
+            p.setX((int) (p.getX() * k));
+            p.setY((int) (p.getY() * k));
         }
     }
 
     @Override
-    public void symetriecentrale() {
-        for (Point p : this.points) {
-            p.setX(-p.getX());
-            p.setY(-p.getY());
+    public void symetriecentrale(Point p) {
+        for (Point p1 : this.points) {
+            int x1 = p.getX() + (p.getX() - p1.getX());
+            int y1 = p.getY() + (p.getY() - p1.getY());
+            p1.setX(x1);
+            p1.setY(y1);
         }
     }
 }
+
 
 

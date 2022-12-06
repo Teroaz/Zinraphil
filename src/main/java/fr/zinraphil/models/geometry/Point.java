@@ -2,7 +2,7 @@ package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
 
-public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
+public class Point implements Comparable<Point> ,ITranslation ,Isymetriecentrale{
 
     private int x;
     private int y;
@@ -41,10 +41,19 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
     }
 
     @Override
-    public void symetrieaxiale() {
-        this.x = -this.x;
-        this.y = -this.y;
+    public void symetriecentrale(Point p) {
+        int x1= p.getX() + (p.getX() - this.x);
+        int y1= p.getY() + (p.getY() - this.y);
+        this.x=x1;
+        this.y=y1;
+
     }
 }
+
+
+
+
+
+
 
 

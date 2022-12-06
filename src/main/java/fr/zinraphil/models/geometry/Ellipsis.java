@@ -6,16 +6,16 @@ import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Ihomothety ,Isymetriecentrale{
 
     private final Point center;
-    private final int radiusX;
-    private final int radiusY;
+    private int radiusX;
+    private int radiusY;
 
     private Angle azimuth = new Angle(DEGREE, 0);
 
     public Ellipsis(Point center, int radiusX, int radiusY) {
-        if (radiusX==radiusY){
+        if (radiusX == radiusY) {
             throw new IllegalArgumentException("The radiusX and radiusY must be different");
         }
         this.center = center;
@@ -79,15 +79,17 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
     }
 
     @Override
-    public void symetrieaxiale() {
-
-
-
+    public void homothety(float k) {
+        this.radiusX *= k;
+        this.radiusY *= k;
     }
 
     @Override
-    public void symetriecentrale() {
-
+    public void symetriecentrale(Point p) {
+        int x1= p.getX() + (p.getX() - center.getX());
+        int y1= p.getY() + (p.getY() - center.getY());
+        this.center.setX(x1);
+        this.center.setY(y1);
 
     }
 }

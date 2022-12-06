@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
-public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Isymetrieaxiale {
+public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Ihomothety ,Isymetriecentrale{
 
     private Point center;
     private int radius;
@@ -35,6 +35,7 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
         if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
         return this.radius - o.getRadius();
     }
+
     public void translation(int deltaX, int deltaY) {
         this.center.translation(deltaX, deltaY);
     }
@@ -45,10 +46,18 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
     }
 
     @Override
-    public void symetrieaxiale() {
-      // creating a line as the symmetry axis
-        Line line = new Line(new Point(IMAGE_SIZE / 2, 0), new Point(IMAGE_SIZE / 2, IMAGE_SIZE));
-        // SYMMETERY OF THE CIRCLE WITH RESPECT TO THE AXIS
+    public void homothety(float k) {
+        this.radius *= k;
+    }
 
+    @Override
+    public void symetriecentrale(Point p) {
+         int x1= p.getX() + (p.getX() - center.getX());
+         int y1= p.getY() + (p.getY() - center.getY());
+         this.center.setX(x1);
+         this.center.setY(y1);
     }
 }
+
+
+
