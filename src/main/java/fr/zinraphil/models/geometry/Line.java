@@ -1,7 +1,6 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.AxialSymmetryShape;
 import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import static java.lang.Math.*;
@@ -57,19 +56,9 @@ public class Line extends Shape<Line> implements  IRotation , ITranslation ,Isym
     }
 
     @Override
-    public void symetrieaxiale() {
-        // symmetry of a line with respect to the axis
-        int x1 = this.p1.getX();
-        int y1 = this.p1.getY();
-        int x2 = this.p2.getX();
-        int y2 = this.p2.getY();
-        this.p1.setX(x1);
-        this.p1.setY(y2);
-        this.p2.setX(x2);
-        this.p2.setY(y1);
-
-
-
+    public void symetrieaxiale(Axis axis) {
+        this.p1.symetrieaxiale(axis);
+        this.p2.symetrieaxiale(axis);
     }
 
     @Override

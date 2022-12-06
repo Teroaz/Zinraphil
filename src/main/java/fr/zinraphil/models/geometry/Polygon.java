@@ -88,10 +88,9 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
     }
 
     @Override
-    public void symetrieaxiale() {
+    public void symetrieaxiale(Axis axis) {
         for (Point p : this.points) {
-            p.setX(-p.getX());
-            p.setY(-p.getY());
+            p.symetrieaxiale(axis);
         }
     }
 

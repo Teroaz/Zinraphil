@@ -6,6 +6,7 @@ import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.awt.*;
 
+import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
 public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDrawable, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
@@ -86,11 +87,14 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IDr
     }
 
     @Override
-    public void symetrieaxiale() {
-
-
-
+    public void symetrieaxiale(Axis axis) {
+        if (axis == Axis.X) {
+            this.center.setY(IMAGE_SIZE - this.center.getY());
+        } else {
+            this.center.setX(IMAGE_SIZE - this.center.getX());
+        }
     }
+
 
     @Override
     public void symetriecentrale() {
