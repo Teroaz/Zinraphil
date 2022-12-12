@@ -11,7 +11,7 @@ class LineTest {
     @Test
     void rotation() {
         Line line = new Line(new Point(100, 125), new Point(125, 125));
-        line.rotation(new Angle(AngleType.DEGREE, 90));
+        line.applyRotation(new Angle(AngleType.DEGREE, 90));
         assertEquals(100, line.getP1().getX());
         assertEquals(125, line.getP1().getY());
         assertEquals(125, line.getP2().getX());

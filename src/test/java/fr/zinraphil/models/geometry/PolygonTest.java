@@ -1,5 +1,7 @@
-package fr.zinraphil.models.geometry;
+package java.fr.zinraphil.models.geometry;
 
+import fr.zinraphil.models.geometry.Point;
+import fr.zinraphil.models.geometry.Polygon;
 import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.geometry.angle.AngleType;
 import org.junit.jupiter.api.Test;
@@ -38,14 +40,14 @@ class PolygonTest {
 
         ArrayList<Point> points = getTestPoints();
         Polygon polygon = new Polygon(points);
-        assertEquals(20, polygon.area());
+        assertEquals(20, polygon.getArea());
     }
 
     @org.junit.jupiter.api.Test
     void perimeter() {
         ArrayList<Point> points = getTestPoints();
         Polygon polygon = new Polygon(points);
-        assertEquals(4, polygon.perimeter());
+        assertEquals(4, polygon.getPerimeter());
     }
 
     @org.junit.jupiter.api.Test
@@ -61,7 +63,7 @@ class PolygonTest {
         ArrayList<Point> points = getSquarePoints();
         Polygon polygon = new Polygon(points);
         Angle angle = new Angle(AngleType.DEGREE, 90);
-        polygon.rotation(angle);
+        polygon.applyRotation(angle);
         assertEquals(100, polygon.getPoints().get(0).getX());
         assertEquals(50, polygon.getPoints().get(0).getY());
         assertEquals(100, polygon.getPoints().get(1).getX());

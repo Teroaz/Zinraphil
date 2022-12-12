@@ -1,8 +1,9 @@
-package fr.zinraphil.models.geometry;
+package java.fr.zinraphil.models.geometry;
 
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
+import fr.zinraphil.models.geometry.Point;
+import fr.zinraphil.models.transformations.Axis;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PointTest {
 
@@ -16,7 +17,7 @@ class PointTest {
     @org.junit.jupiter.api.Test
     void translation() {
         Point point = new Point(1, 2);
-        point.translation(1, 1);
+        point.applyTranslation(1, 1);
         assertEquals(2, point.getX());
         assertEquals(3, point.getY());
     }
@@ -24,7 +25,7 @@ class PointTest {
     @org.junit.jupiter.api.Test
     void symetrieaxialeX() {
         Point point = new Point(1, 2);
-        point.symetrieaxiale(Axis.X);
+        point.applyAxialSymmetry(Axis.X);
         assertEquals(1, point.getX());
         assertEquals(248, point.getY());
     }
@@ -32,7 +33,7 @@ class PointTest {
     @org.junit.jupiter.api.Test
     void symetrieaxialeY() {
         Point point = new Point(1, 2);
-        point.symetrieaxiale(Axis.Y);
+        point.applyAxialSymmetry(Axis.Y);
         assertEquals(249, point.getX());
         assertEquals(2, point.getY());
     }
