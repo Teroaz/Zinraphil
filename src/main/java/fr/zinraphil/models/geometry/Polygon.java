@@ -5,6 +5,7 @@ import fr.zinraphil.models.geometry.angle.Angle;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static java.lang.Math.cos;
 
 public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
@@ -59,14 +60,13 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
 
     @Override
     public void rotation(Angle angle) {
+        //make the rotation of the polygon
         for (int i = 0; i < points.size(); i++) {
             Point p1 = points.get(i);
             Point p2 = points.get((i + 1) % points.size());
 
-            p2.setX((int) (p2.getX() * cos(angle.getDegree())));
-            p2.setY((int) (p2.getY() * cos(angle.getDegree())));
-
-
+            p2.setX((int) (p2.getX() * cos(angle.getRadian())));
+            p2.setY((int) (p2.getY() * cos(angle.getRadian())));
         }
     }
 
@@ -78,10 +78,9 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     @Override
-    public void symetrieaxiale() {
+    public void symetrieaxiale(Axis axis) {
         for (Point p : this.points) {
-            p.setX(-p.getX());
-            p.setY(-p.getY());
+            p.symetrieaxiale(axis);
         }
     }
 

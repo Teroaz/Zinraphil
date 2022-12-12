@@ -1,10 +1,12 @@
 package fr.zinraphil.models.geometry;
 
+import fr.zinraphil.models.transformations.axial_symetry.Axis;
+
 import java.awt.*;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
-public class Circle extends Shape<Circle> implements IDrawable, ITranslation, Isymetrieaxiale {
+public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Isymetrieaxiale {
 
     private Point center;
     private int radius;
@@ -31,12 +33,9 @@ public class Circle extends Shape<Circle> implements IDrawable, ITranslation, Is
     }
 
     @Override
-    public int compareTo(Shape o) {
-        if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
-
-        Circle c = (Circle) o;
-//        if (this.center.compareTo(c.getCenter()) != 0) return this.center.compareTo(c.getCenter());
-        return this.radius - c.getRadius();
+    public int compareTo(Circle o) {
+        if (this.center.compareTo(o.getCenter()) != 0) return this.center.compareTo(o.getCenter());
+        return this.radius - o.getRadius();
     }
 
     public void translation(int deltaX, int deltaY) {
@@ -49,10 +48,12 @@ public class Circle extends Shape<Circle> implements IDrawable, ITranslation, Is
     }
 
     @Override
-    public void symetrieaxiale() {
-        // creating a line as the symmetry axis
-        Line line = new Line(new Point(IMAGE_SIZE / 2, 0), new Point(IMAGE_SIZE / 2, IMAGE_SIZE));
-        // SYMMETERY OF THE CIRCLE WITH RESPECT TO THE AXIS
+    public void symetrieaxiale(Axis axis) {
+        if (axis == Axis.X) {
+            this.center.setY(IMAGE_SIZE - this.center.getY());
+        } else {
+            this.center.setX(IMAGE_SIZE - this.center.getX());
+        }
 
     }
 

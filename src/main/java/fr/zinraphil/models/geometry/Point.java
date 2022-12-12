@@ -1,6 +1,10 @@
 package fr.zinraphil.models.geometry;
 
-public class Point implements Comparable<Point>, ITranslation, Isymetrieaxiale {
+import fr.zinraphil.models.transformations.axial_symetry.Axis;
+
+import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
+
+public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
 
     private int x;
     private int y;
@@ -39,9 +43,12 @@ public class Point implements Comparable<Point>, ITranslation, Isymetrieaxiale {
     }
 
     @Override
-    public void symetrieaxiale() {
-        this.x = -this.x;
-        this.y = -this.y;
+    public void symetrieaxiale(Axis axis) {
+        if (axis == Axis.X) {
+            this.y = IMAGE_SIZE - this.y;
+        } else {
+            this.x = IMAGE_SIZE - this.x;
+        }
     }
 
     @Override
