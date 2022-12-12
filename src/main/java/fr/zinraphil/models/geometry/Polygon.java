@@ -2,11 +2,12 @@ package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static java.lang.Math.cos;
 
-public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
 
     private ArrayList<Point> points;
 
@@ -97,6 +98,15 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
         return "Polygon{" +
                 "points=" + points +
                 '}';
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        for (int i = 0; i < points.size(); i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i + 1) % points.size());
+            g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        }
     }
 }
 

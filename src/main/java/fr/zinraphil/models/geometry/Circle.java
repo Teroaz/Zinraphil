@@ -35,7 +35,7 @@ public class Circle extends Shape<Circle> implements IDrawable, ITranslation, Is
         if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
 
         Circle c = (Circle) o;
-        if (this.center.compareTo(c.getCenter()) != 0) return this.center.compareTo(c.getCenter());
+//        if (this.center.compareTo(c.getCenter()) != 0) return this.center.compareTo(c.getCenter());
         return this.radius - c.getRadius();
     }
 

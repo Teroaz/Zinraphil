@@ -30,14 +30,8 @@ public class Image {
         return shapes;
     }
 
-    public void addShape(Shape shape) {
-        // TODO: check if shape is in image
-        System.out.println("Adding shape " + shape);
-        shapes.add(shape);
-    }
-
-    public void removeShape(Shape shape) {
-        shapes.remove(shape);
+    public boolean addShape(Shape shape) {
+        return shapes.add(shape);
     }
 
     public TreeSet<Shape> sortPerimeter() {

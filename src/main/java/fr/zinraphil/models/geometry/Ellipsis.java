@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements IDrawable, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
 
     private final Point center;
     private final int radiusX;
@@ -57,7 +57,7 @@ public class Ellipsis extends Shape<Ellipsis> implements IDrawable, IRotation, I
         if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
 
         Ellipsis e = (Ellipsis) o;
-        if (this.center.compareTo(e.getCenter()) != 0) return this.center.compareTo(e.getCenter());
+//        if (this.center.compareTo(e.getCenter()) != 0) return this.center.compareTo(e.getCenter());
         if (this.radiusX != e.getRadiusX()) return this.radiusX - e.getRadiusX();
         if (this.radiusY != e.getRadiusY()) return this.radiusY - e.getRadiusY();
 
@@ -66,7 +66,12 @@ public class Ellipsis extends Shape<Ellipsis> implements IDrawable, IRotation, I
 
     @Override
     public void draw(Graphics g) {
-        g.drawOval(center.getX() - radiusX, center.getY() - radiusY, radiusX * 2, radiusY * 2);
+        Graphics2D g2d = (Graphics2D) g;
+
+        g2d.rotate(azimuth.getRadian(), center.getX(), center.getY());
+        g2d.drawOval(center.getX() - radiusX, center.getY() - radiusY, radiusX * 2, radiusY * 2);
+        g2d.rotate(-azimuth.getRadian(), center.getX(), center.getY());
+
     }
 
     @Override

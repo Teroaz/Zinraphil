@@ -33,6 +33,8 @@ public class ImagePanel extends JPanel {
 
         for (Shape shape : image.getShapes()) {
             Color color = new Color(shape.hashCode() & 0x00FFFFFF);
+            float hue = Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(), null)[0];
+            color = new Color(Color.HSBtoRGB(hue, 0.45f, 0.65f));
             g2.setColor(color);
 
             if (shape instanceof IDrawable) {
