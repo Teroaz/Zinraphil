@@ -1,11 +1,14 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
+import fr.zinraphil.models.transformations.*;
 
 import java.awt.*;
 
-public class Line extends Shape<Line> implements  IRotation , ITranslation ,Isymetriecentrale,Ihomothety{
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
+public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslation, ICentralSymmetry, IHomothethy, IAxialSymmetry {
 
     private Point p1;
     private Point p2;
@@ -27,11 +30,11 @@ public class Line extends Shape<Line> implements  IRotation , ITranslation ,Isym
         return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
     }
 
-    public double area() {
+    public double getArea() {
         return 0;
     }
 
-    public double perimeter() {
+    public double getPerimeter() {
         return length();
     }
 
@@ -45,42 +48,48 @@ public class Line extends Shape<Line> implements  IRotation , ITranslation ,Isym
         return this.p2.compareTo(l.getP2());
     }
 
-    public void translation(int deltaX, int deltaY) {
-        p1.translation(deltaX, deltaY);
-        p2.translation(deltaX, deltaY);
+    public void applyTranslation(int deltaX, int deltaY) {
+        p1.applyTranslation(deltaX, deltaY);
+        p2.applyTranslation(deltaX, deltaY);
     }
 
 
     @Override
-    public void rotation(Angle angle) {
+    public void applyRotation(Angle angle) {
         this.p2.setX((int) (this.p2.getX() * cos(angle.getDegree())));
         this.p2.setY((int) (this.p2.getY() * sin(angle.getDegree())));
 
     }
 
     @Override
-    public void homothety(float k) {
+    public void applyHomothety(float k) {
         p1.setX((int) (p1.getX() * k));
         p2.setX((int) (p2.getX() * k));
         p1.setY((int) (p1.getY() * k));
         p2.setY((int) (p2.getY() * k));
     }
 
-    public void symetrieaxiale(Axis axis) {
-        this.p1.symetrieaxiale(axis);
-        this.p2.symetrieaxiale(axis);
+    @Override
+    public void applyAxialSymmetry(Axis axis) {
+        this.p1.applyAxialSymmetry(axis);
+        this.p2.applyAxialSymmetry(axis);
     }
 
     @Override
-    public void symetriecentrale(Point p) {
-        int x1 = p.getX()+(p.getX()-p1.getX());
-        int y1 = p.getY()+(p.getY()-p1.getY());
-        int x2 = p.getX()+(p.getX()-p2.getX());
-        int y2 = p.getY()+(p.getY()-p2.getY());
+    public void applyCentralSymmetry(Point p) {
+        int x1 = p.getX() + (p.getX() - p1.getX());
+        int y1 = p.getY() + (p.getY() - p1.getY());
+        int x2 = p.getX() + (p.getX() - p2.getX());
+        int y2 = p.getY() + (p.getY() - p2.getY());
         p1.setX(x1);
         p1.setY(y1);
         p2.setX(x2);
         p2.setY(y2);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
     }
 }
 

@@ -1,8 +1,7 @@
-package fr.zinraphil.models.geometry;
+package fr.zinraphil.models.transformations;
 
 import fr.zinraphil.models.geometry.angle.Angle;
 
 public interface IRotation {
-
-    public void rotation(Angle angle);
+    void applyRotation(Angle angle);
 }

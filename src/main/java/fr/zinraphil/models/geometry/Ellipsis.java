@@ -1,14 +1,14 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
+import fr.zinraphil.models.transformations.*;
 
 import java.awt.*;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Ihomothety ,Isymetriecentrale{
+public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation, IHomothethy, ICentralSymmetry, IDrawable {
 
     private final Point center;
     private int radiusX;
@@ -46,11 +46,11 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
         return azimuth;
     }
 
-    public double area() {
+    public double getArea() {
         return Math.PI * radiusX * radiusY;
     }
 
-    public double perimeter() {
+    public double getPerimeter() {
         return 2 * Math.PI * Math.sqrt((radiusX * radiusX + radiusY * radiusY) / 2);
     }
 
@@ -77,19 +77,19 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
     }
 
     @Override
-    public void rotation(Angle angle) {
+    public void applyRotation(Angle angle) {
         if (angle.getDegree() == 0) return;
         this.azimuth = this.azimuth.add(angle);
     }
 
 
     @Override
-    public void translation(int deltaX, int deltaY) {
-        this.center.translation(deltaX, deltaY);
+    public void applyTranslation(int deltaX, int deltaY) {
+        this.center.applyTranslation(deltaX, deltaY);
     }
 
     @Override
-    public void homothety(float k) {
+    public void applyHomothety(float k) {
         this.radiusX *= k;
         this.radiusY *= k;
     }
@@ -104,9 +104,9 @@ public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRo
 
 
     @Override
-    public void symetriecentrale(Point p) {
-        int x1= p.getX() + (p.getX() - center.getX());
-        int y1= p.getY() + (p.getY() - center.getY());
+    public void applyCentralSymmetry(Point p) {
+        int x1 = p.getX() + (p.getX() - center.getX());
+        int y1 = p.getY() + (p.getY() - center.getY());
         this.center.setX(x1);
         this.center.setY(y1);
 

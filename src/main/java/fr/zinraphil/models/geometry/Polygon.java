@@ -1,14 +1,14 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
+import fr.zinraphil.models.transformations.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 import static java.lang.Math.cos;
 
-public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
+public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, ICentralSymmetry, IDrawable, IHomothethy, IAxialSymmetry {
 
     private ArrayList<Point> points;
 
@@ -20,8 +20,8 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
         return points;
     }
 
-    public double area() {
-        // Calculate the are of a polygon using the Shoelace formula
+    public double getArea() {
+        // Calculate the area of a polygon using the Shoelace formula
         // https://en.wikipedia.org/wiki/Shoelace_formula
         double area = 0;
         for (int i = 0; i < points.size(); i++) {
@@ -32,7 +32,7 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
         return Math.abs(area) / 2;
     }
 
-    public double perimeter() {
+    public double getPerimeter() {
         double perimeter = 0;
         for (int i = 0; i < points.size(); i++) {
             Point p1 = points.get(i);
@@ -59,7 +59,7 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
     }
 
     @Override
-    public void rotation(Angle angle) {
+    public void applyRotation(Angle angle) {
         for (Point p : this.points) {
             p.setX((int) (p.getX() * cos(angle.getRadian())));
             p.setY((int) (p.getY() * cos(angle.getRadian())));
@@ -68,28 +68,30 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
     }
 
     @Override
-    public void translation(int deltaX, int deltaY) {
+    public void applyTranslation(int deltaX, int deltaY) {
         for (Point p : this.points) {
-            p.translation(deltaX, deltaY);
+            p.applyTranslation(deltaX, deltaY);
         }
     }
 
+
     @Override
-    public void homothety(float k) {
+    public void applyHomothety(float k) {
         for (Point p : this.points) {
             p.setX((int) (p.getX() * k));
             p.setY((int) (p.getY() * k));
         }
     }
 
-    public void symetrieaxiale(Axis axis) {
+    @Override
+    public void applyAxialSymmetry(Axis axis) {
         for (Point p : this.points) {
-            p.symetrieaxiale(axis);
+            p.applyAxialSymmetry(axis);
         }
     }
 
     @Override
-    public void symetriecentrale(Point p) {
+    public void applyCentralSymmetry(Point p) {
         for (Point p1 : this.points) {
             int x1 = p.getX() + (p.getX() - p1.getX());
             int y1 = p.getY() + (p.getY() - p1.getY());
@@ -99,19 +101,19 @@ public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRota
     }
 
     @Override
-    public String toString() {
-        return "Polygon{" +
-                "points=" + points +
-                '}';
-    }
-
-    @Override
     public void draw(Graphics g) {
         for (int i = 0; i < points.size(); i++) {
             Point p1 = points.get(i);
             Point p2 = points.get((i + 1) % points.size());
             g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Polygon{" +
+                "points=" + points +
+                '}';
     }
 }
 

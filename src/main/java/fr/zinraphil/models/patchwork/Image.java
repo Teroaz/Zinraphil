@@ -35,11 +35,11 @@ public class Image {
     }
 
     public TreeSet<Shape> sortPerimeter() {
-        return shapes.stream().sorted(Comparator.comparingDouble(Shape::perimeter)).collect(Collectors.toCollection(TreeSet::new));
+        return shapes.stream().sorted(Comparator.comparingDouble(Shape::getPerimeter)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     public TreeSet<Shape> sortArea() {
-        return shapes.stream().sorted(Comparator.comparingDouble(Shape::area)).collect(Collectors.toCollection(TreeSet::new));
+        return shapes.stream().sorted(Comparator.comparingDouble(Shape::getArea)).collect(Collectors.toCollection(TreeSet::new));
     }
 
     @Override

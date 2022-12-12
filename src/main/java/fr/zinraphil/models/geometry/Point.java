@@ -1,10 +1,13 @@
 package fr.zinraphil.models.geometry;
 
-import fr.zinraphil.models.transformations.axial_symetry.Axis;
+import fr.zinraphil.models.transformations.Axis;
+import fr.zinraphil.models.transformations.IAxialSymmetry;
+import fr.zinraphil.models.transformations.ICentralSymmetry;
+import fr.zinraphil.models.transformations.ITranslation;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
-public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
+public class Point implements Comparable<Point>, ITranslation, IAxialSymmetry, ICentralSymmetry {
 
     private int x;
     private int y;
@@ -22,13 +25,6 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
         return y;
     }
 
-
-    @Override
-    public int compareTo(Point o) {
-        if (this.x != o.getX()) return this.x - o.getX();
-        return this.y - o.getY();
-    }
-
     public void setX(int x) {
         this.x = x;
     }
@@ -37,20 +33,28 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
         this.y = y;
     }
 
-    public void translation(int deltaX, int deltaY) {
+
+    @Override
+    public int compareTo(Point o) {
+        if (this.x != o.getX()) return this.x - o.getX();
+        return this.y - o.getY();
+    }
+
+    public void applyTranslation(int deltaX, int deltaY) {
         this.x += deltaX;
         this.y += deltaY;
     }
 
     @Override
-    public void symetriecentrale(Point p) {
+    public void applyCentralSymmetry(Point p) {
         int x1 = p.getX() + (p.getX() - this.x);
         int y1 = p.getY() + (p.getY() - this.y);
         this.x = x1;
         this.y = y1;
     }
 
-    public void symetrieaxiale(Axis axis) {
+    @Override
+    public void applyAxialSymmetry(Axis axis) {
         if (axis == Axis.X) {
             this.y = IMAGE_SIZE - this.y;
         } else {
@@ -65,12 +69,5 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
                 ", y=" + y +
                 '}';
     }
+
 }
-
-
-
-
-
-
-
-

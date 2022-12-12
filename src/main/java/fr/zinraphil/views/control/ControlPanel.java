@@ -6,6 +6,9 @@ import fr.zinraphil.models.geometry.Shape;
 import fr.zinraphil.models.geometry.*;
 import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.geometry.angle.AngleType;
+import fr.zinraphil.models.transformations.IHomothethy;
+import fr.zinraphil.models.transformations.IRotation;
+import fr.zinraphil.models.transformations.ITranslation;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -76,20 +79,20 @@ public class ControlPanel extends JPanel {
         switch (button.getText()) {
             case "Rotation":
                 Angle angle = new Angle(AngleType.DEGREE, 90);
-                shapes.stream().filter(shape -> shape instanceof IRotation).forEach(shape -> ((IRotation) shape).rotation(angle));
+                shapes.stream().filter(shape -> shape instanceof IRotation).forEach(shape -> ((IRotation) shape).applyRotation(angle));
                 break;
             case "Translation":
-                shapes.stream().filter(shape -> shape instanceof ITranslation).forEach(shape -> ((ITranslation) shape).translation(10, 10));
+                shapes.stream().filter(shape -> shape instanceof ITranslation).forEach(shape -> ((ITranslation) shape).applyTranslation(10, 10));
                 break;
             case "Symétrie axiale":
-                shapes.stream().filter(shape -> shape instanceof Isymetrieaxiale).forEach(shape -> ((Isymetrieaxiale) shape).symetrieaxiale());
+//                shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).forEach(shape -> ((Isymetrieaxiale) shape).applyAxialSymmetry(Axis.X));
                 break;
             case "Symétrie centrale":
-                shapes.stream().filter(shape -> shape instanceof Isymetriecentrale).forEach(shape -> ((Isymetriecentrale) shape).symetriecentrale());
+//                shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).forEach(shape -> ((ICentralSymmetry) shape).applyCentralSymmetry());
                 break;
             case "Homothétie":
                 // TODO Implement this transformation
-//                shapes.stream().filter(shape -> shape instanceof Ihomothety).forEach(shape -> ((Ihomothety) shape).homothetie(2));
+                shapes.stream().filter(shape -> shape instanceof IHomothethy).forEach(shape -> ((IHomothethy) shape).applyHomothety(2));
                 break;
         }
 
