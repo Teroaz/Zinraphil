@@ -5,10 +5,7 @@ import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.awt.*;
 
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-
-public class Line extends Shape<Line> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
+public class Line extends Shape<Line> implements  IRotation , ITranslation ,Isymetriecentrale,Ihomothety{
 
     private Point p1;
     private Point p2;
@@ -62,17 +59,28 @@ public class Line extends Shape<Line> implements IRotation, ITranslation, Isymet
     }
 
     @Override
+    public void homothety(float k) {
+        p1.setX((int) (p1.getX() * k));
+        p2.setX((int) (p2.getX() * k));
+        p1.setY((int) (p1.getY() * k));
+        p2.setY((int) (p2.getY() * k));
+    }
+
     public void symetrieaxiale(Axis axis) {
         this.p1.symetrieaxiale(axis);
         this.p2.symetrieaxiale(axis);
     }
 
     @Override
-    public void symetriecentrale() {
-        p1.setX(-p1.getX());
-        p2.setX(-p2.getX());
-        p1.setY(-p1.getY());
-        p2.setY(-p2.getY());
+    public void symetriecentrale(Point p) {
+        int x1 = p.getX()+(p.getX()-p1.getX());
+        int y1 = p.getY()+(p.getY()-p1.getY());
+        int x2 = p.getX()+(p.getX()-p2.getX());
+        int y2 = p.getY()+(p.getY()-p2.getY());
+        p1.setX(x1);
+        p1.setY(y1);
+        p2.setX(x2);
+        p2.setY(y2);
     }
 }
 

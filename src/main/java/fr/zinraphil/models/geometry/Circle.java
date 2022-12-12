@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
-public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Isymetrieaxiale {
+public class Circle extends Shape<Circle> implements IDrawable , ITranslation , Ihomothety ,Isymetriecentrale{
 
     private Point center;
     private int radius;
@@ -48,24 +48,18 @@ public class Circle extends Shape<Circle> implements IDrawable , ITranslation , 
     }
 
     @Override
-    public void symetrieaxiale(Axis axis) {
-        if (axis == Axis.X) {
-            this.center.setY(IMAGE_SIZE - this.center.getY());
-        } else {
-            this.center.setX(IMAGE_SIZE - this.center.getX());
-        }
-
-    }
-
-    public void setRadius(int radius) {
-        this.radius = radius;
+    public void homothety(float k) {
+        this.radius *= k;
     }
 
     @Override
-    public String toString() {
-        return "Circle{" +
-                "center=" + center +
-                ", radius=" + radius +
-                '}';
+    public void symetriecentrale(Point p) {
+         int x1= p.getX() + (p.getX() - center.getX());
+         int y1= p.getY() + (p.getY() - center.getY());
+         this.center.setX(x1);
+         this.center.setY(y1);
     }
 }
+
+
+

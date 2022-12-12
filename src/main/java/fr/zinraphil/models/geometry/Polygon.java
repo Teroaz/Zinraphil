@@ -1,14 +1,14 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
+import fr.zinraphil.models.transformations.axial_symetry.Axis;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static java.lang.Math.cos;
 
-public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
+public class Polygon extends Shape<Polygon> implements AxialSymmetryShape, IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale {
 
     private ArrayList<Point> points;
 
@@ -60,13 +60,10 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
 
     @Override
     public void rotation(Angle angle) {
-        //make the rotation of the polygon
-        for (int i = 0; i < points.size(); i++) {
-            Point p1 = points.get(i);
-            Point p2 = points.get((i + 1) % points.size());
+        for (Point p : this.points) {
+            p.setX((int) (p.getX() * cos(angle.getRadian())));
+            p.setY((int) (p.getY() * cos(angle.getRadian())));
 
-            p2.setX((int) (p2.getX() * cos(angle.getRadian())));
-            p2.setY((int) (p2.getY() * cos(angle.getRadian())));
         }
     }
 
@@ -78,6 +75,13 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     @Override
+    public void homothety(float k) {
+        for (Point p : this.points) {
+            p.setX((int) (p.getX() * k));
+            p.setY((int) (p.getY() * k));
+        }
+    }
+
     public void symetrieaxiale(Axis axis) {
         for (Point p : this.points) {
             p.symetrieaxiale(axis);
@@ -85,10 +89,12 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     @Override
-    public void symetriecentrale() {
-        for (Point p : this.points) {
-            p.setX(-p.getX());
-            p.setY(-p.getY());
+    public void symetriecentrale(Point p) {
+        for (Point p1 : this.points) {
+            int x1 = p.getX() + (p.getX() - p1.getX());
+            int y1 = p.getY() + (p.getY() - p1.getY());
+            p1.setX(x1);
+            p1.setY(y1);
         }
     }
 
@@ -108,5 +114,4 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
         }
     }
 }
-
 

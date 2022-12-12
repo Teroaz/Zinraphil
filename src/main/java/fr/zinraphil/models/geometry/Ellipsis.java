@@ -8,11 +8,11 @@ import java.awt.*;
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
-public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation, Isymetrieaxiale, Isymetriecentrale, IDrawable {
+public class Ellipsis extends Shape<Ellipsis> implements AxialSymmetryShape, IRotation, ITranslation, Ihomothety ,Isymetriecentrale{
 
     private final Point center;
-    private final int radiusX;
-    private final int radiusY;
+    private int radiusX;
+    private int radiusY;
 
     private Angle azimuth = new Angle(DEGREE, 0);
 
@@ -89,6 +89,11 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
     }
 
     @Override
+    public void homothety(float k) {
+        this.radiusX *= k;
+        this.radiusY *= k;
+    }
+
     public void symetrieaxiale(Axis axis) {
         if (axis == Axis.X) {
             this.center.setY(IMAGE_SIZE - this.center.getY());
@@ -99,8 +104,11 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
 
 
     @Override
-    public void symetriecentrale() {
-
+    public void symetriecentrale(Point p) {
+        int x1= p.getX() + (p.getX() - center.getX());
+        int y1= p.getY() + (p.getY() - center.getY());
+        this.center.setX(x1);
+        this.center.setY(y1);
 
     }
 

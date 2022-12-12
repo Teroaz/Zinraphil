@@ -43,6 +43,13 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
     }
 
     @Override
+    public void symetriecentrale(Point p) {
+        int x1 = p.getX() + (p.getX() - this.x);
+        int y1 = p.getY() + (p.getY() - this.y);
+        this.x = x1;
+        this.y = y1;
+    }
+
     public void symetrieaxiale(Axis axis) {
         if (axis == Axis.X) {
             this.y = IMAGE_SIZE - this.y;
@@ -59,5 +66,11 @@ public class Point implements Comparable<Point> ,ITranslation ,Isymetrieaxiale{
                 '}';
     }
 }
+
+
+
+
+
+
 
 
