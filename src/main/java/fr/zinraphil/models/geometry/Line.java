@@ -10,35 +10,71 @@ import java.awt.*;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
+/**
+ * Represents a line in a two-dimensional space.
+ *
+ */
 public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslation, ICentralSymmetry, IHomothethy, IAxialSymmetry {
 
     private Point p1;
     private Point p2;
 
+    /**
+     * Creates a new line with the given end points.
+     *
+     * @param p1 the first end point of the line
+     * @param p2 the second end point of the line
+     */
     public Line(Point p1, Point p2) {
         this.p1 = p1;
         this.p2 = p2;
     }
 
+    /**
+     * Returns the first end point of the line.
+     *
+     * @return the first end point of the line
+     */
     public Point getP1() {
         return p1;
     }
 
+    /**
+     * Returns the second end point of the line.
+     *
+     * @return the second end point of the line
+     */
     public Point getP2() {
         return p2;
     }
 
+    /**
+     * Returns the length of the line.
+     *
+     * @return the length of the line
+     */
     public double length() {
         return Math.sqrt(Math.pow(p2.getX() - p1.getX(), 2) + Math.pow(p2.getY() - p1.getY(), 2));
     }
 
+    /**
+     * Returns the area of the line.
+     *
+     * @return the area of the line
+     */
     public double getArea() {
         return 0;
     }
 
+    /**
+     * Returns the perimeter of the line.
+     *
+     * @return the perimeter of the line
+     */
     public double getPerimeter() {
         return length();
     }
+
 
 
     @Override
@@ -49,6 +85,7 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         if (this.p1.compareTo(l.getP1()) != 0) return this.p1.compareTo(l.getP1());
         return this.p2.compareTo(l.getP2());
     }
+
 
     public void applyTranslation(int deltaX, int deltaY) {
         p1.applyTranslation(deltaX, deltaY);
