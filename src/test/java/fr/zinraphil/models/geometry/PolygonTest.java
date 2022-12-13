@@ -1,4 +1,4 @@
-package java.fr.zinraphil.models.geometry;
+package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.Point;
 import fr.zinraphil.models.geometry.Polygon;
@@ -28,10 +28,10 @@ class PolygonTest {
 
     ArrayList<Point> getSquarePoints() {
         ArrayList<Point> points = new ArrayList<>();
-        points.add(new Point(50, 50));
+        points.add(new Point(50, 0));
+        points.add(new Point(100, 0));
         points.add(new Point(100, 50));
-        points.add(new Point(100, 100));
-        points.add(new Point(50, 100));
+        points.add(new Point(50, 50));
         return points;
     }
 
@@ -65,13 +65,13 @@ class PolygonTest {
         Angle angle = new Angle(AngleType.DEGREE, 90);
         polygon.applyRotation(angle);
         assertEquals(100, polygon.getPoints().get(0).getX());
-        assertEquals(50, polygon.getPoints().get(0).getY());
+        assertEquals(0, polygon.getPoints().get(0).getY());
         assertEquals(100, polygon.getPoints().get(1).getX());
-        assertEquals(100, polygon.getPoints().get(1).getY());
+        assertEquals(50, polygon.getPoints().get(1).getY());
         assertEquals(50, polygon.getPoints().get(2).getX());
-        assertEquals(100, polygon.getPoints().get(2).getY());
+        assertEquals(50, polygon.getPoints().get(2).getY());
         assertEquals(50, polygon.getPoints().get(3).getX());
-        assertEquals(50, polygon.getPoints().get(3).getY());
+        assertEquals(0, polygon.getPoints().get(3).getY());
     }
 
     @Test

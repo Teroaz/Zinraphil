@@ -2,6 +2,7 @@ package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.transformations.*;
+import fr.zinraphil.utils.Coordinates;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -60,10 +61,11 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
 
     @Override
     public void applyRotation(Angle angle) {
-        for (Point p : this.points) {
-            p.setX((int) (p.getX() * cos(angle.getRadian())));
-            p.setY((int) (p.getY() * cos(angle.getRadian())));
-
+        for (int i = 0; i < points.size(); i++) {
+            Point p1 = points.get(i);
+            Point p2 = points.get((i + 1) % points.size());
+            Line line = new Line(p2, p1);
+            line.applyRotation(angle);
         }
     }
 

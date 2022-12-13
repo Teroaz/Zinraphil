@@ -1,7 +1,9 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
+import fr.zinraphil.models.geometry.angle.AngleType;
 import fr.zinraphil.models.transformations.*;
+import fr.zinraphil.utils.Coordinates;
 
 import java.awt.*;
 
@@ -56,8 +58,22 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
 
     @Override
     public void applyRotation(Angle angle) {
-        this.p2.setX((int) (this.p2.getX() * cos(angle.getDegree())));
-        this.p2.setY((int) (this.p2.getY() * sin(angle.getDegree())));
+        Coordinates coordinates = new Coordinates();
+
+        int x0 = coordinates.transformCoordinates(p1.getX());
+        int y0 = coordinates.transformCoordinates(p1.getY());
+
+        int x1 = coordinates.transformCoordinates(p2.getX());
+        int y1 = coordinates.transformCoordinates(p2.getY());
+
+        double x = x1 - x0;
+        double y = y1 - y0;
+        double newX = x * cos(angle.getDegree()) - y * sin(angle.getDegree());
+        double newY = x * sin(angle.getDegree()) + y * cos(angle.getDegree());
+
+        p2.setX(coordinates.revertCoordinates((int) newX + x0));
+        p2.setY(coordinates.revertCoordinates((int) newY + y0));
+
 
     }
 
