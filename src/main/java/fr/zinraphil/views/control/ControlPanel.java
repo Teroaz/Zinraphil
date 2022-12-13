@@ -6,15 +6,16 @@ import fr.zinraphil.models.geometry.Shape;
 import fr.zinraphil.models.geometry.*;
 import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.geometry.angle.AngleType;
+import fr.zinraphil.models.patchwork.Image;
 import fr.zinraphil.models.transformations.IHomothethy;
 import fr.zinraphil.models.transformations.IRotation;
 import fr.zinraphil.models.transformations.ITranslation;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class ControlPanel extends JPanel {
 
@@ -22,9 +23,7 @@ public class ControlPanel extends JPanel {
     private final JPanel transformationsPanel;
     private final JPanel shapesPanel;
 
-    private final JTable table;
-
-    private DefaultTableModel shapesListModel;
+    private final JTableShape table;
 
 
     public ControlPanel() {
@@ -63,22 +62,20 @@ public class ControlPanel extends JPanel {
         transformationsPanel.setVisible(false);
         this.add(transformationsPanel);
 
-        table = new JTable();
-        shapesListModel = new DefaultTableModel();
-        table.setModel(shapesListModel);
-        table.setVisible(false);
-
-        this.add(table);
+        table = new JTableShape(new ModelShape());
+        this.add(table.getScrollPane());
     }
 
     private void onTransformationClick(JButton button) {
 
         System.out.println("[OnTransformationClick] Click on " + button.getText());
 
-        List shapes = ImageController.getInstance().getCurrentImagePanel().getImage().getShapes().stream().toList();
+        Image selectedImage = ImageController.getInstance().getCurrentImagePanel().getImage();
+        List shapes = selectedImage.getShapes().stream().toList();
+
         switch (button.getText()) {
             case "Rotation":
-                Angle angle = new Angle(AngleType.DEGREE, 90);
+                Angle angle = new Angle(AngleType.DEGREE, new Random().nextInt(360));
                 shapes.stream().filter(shape -> shape instanceof IRotation).forEach(shape -> ((IRotation) shape).applyRotation(angle));
                 break;
             case "Translation":
@@ -92,16 +89,16 @@ public class ControlPanel extends JPanel {
                 break;
             case "Homothétie":
                 // TODO Implement this transformation
-                shapes.stream().filter(shape -> shape instanceof IHomothethy).forEach(shape -> ((IHomothethy) shape).applyHomothety(2));
+                shapes.stream().filter(shape -> shape instanceof IHomothethy).forEach(shape -> ((IHomothethy) shape).applyHomothety(0.6f));
                 break;
         }
-
 
     }
 
     private void onShapeClick(JButton button) {
 
         System.out.println("[OnShapeClick] Click on " + button.getText());
+        Image selectedImage = ImageController.getInstance().getCurrentImagePanel().getImage();
 
         Shape shape = switch (button.getText()) {
             case "Cercle" -> ShapeFactory.generateShape(Circle.class);
@@ -112,13 +109,14 @@ public class ControlPanel extends JPanel {
         };
 
         if (shape != null) {
-            boolean isNewToImage = ImageController.getInstance().getCurrentImagePanel().getImage().addShape(shape);
+            boolean isNewToImage = selectedImage.addShape(shape);
             if (!isNewToImage) {
                 JOptionPane.showMessageDialog(this, "La forme à insérer est déjà présente dans l'image. Tentative avec de nouvelles valeurs", "Erreur", JOptionPane.ERROR_MESSAGE);
                 this.onShapeClick(button);
             }
-        }
 
+            table.getModelShape().setShapes(selectedImage.getShapes());
+        }
         this.updateUI();
     }
 

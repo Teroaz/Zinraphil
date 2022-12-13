@@ -1,7 +1,6 @@
 package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
-import fr.zinraphil.models.geometry.angle.AngleType;
 import fr.zinraphil.models.transformations.*;
 import fr.zinraphil.utils.Coordinates;
 
@@ -11,8 +10,10 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 /**
- * Represents a line in a two-dimensional space.
- *
+ * Represents a line in a two-dimensional plane.
+ * It extends the {@link Shape} class and implements the
+ * {@link IDrawable}, {@link IRotation}, {@link ITranslation}, {@link IHomothethy},
+ * {@link IAxialSymmetry} and {@link ICentralSymmetry} interfaces.
  */
 public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslation, ICentralSymmetry, IHomothethy, IAxialSymmetry {
 
@@ -76,7 +77,6 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
     }
 
 
-
     @Override
     public int compareTo(Shape o) {
         if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
@@ -110,8 +110,6 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
 
         p2.setX(coordinates.revertCoordinates((int) newX + x0));
         p2.setY(coordinates.revertCoordinates((int) newY + y0));
-
-
     }
 
     @Override

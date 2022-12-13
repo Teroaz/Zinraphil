@@ -28,6 +28,7 @@ public class ZinraphilFrame extends JFrame {
         int width = gd.getDisplayMode().getWidth() - 50;
         int height = gd.getDisplayMode().getHeight() - 50;
 
+
         WIDTH = width;
         HEIGHT = height - (height % IMAGE_SIZE);
 

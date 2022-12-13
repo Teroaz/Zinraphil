@@ -73,13 +73,14 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
         g2d.rotate(azimuth.getRadian(), center.getX(), center.getY());
         g2d.drawOval(center.getX() - radiusX, center.getY() - radiusY, radiusX * 2, radiusY * 2);
         g2d.rotate(-azimuth.getRadian(), center.getX(), center.getY());
-
     }
 
     @Override
     public void applyRotation(Angle angle) {
         if (angle.getDegree() == 0) return;
+        System.out.println("Ellipsis rotation, before: " + this.azimuth.getDegree());
         this.azimuth = this.azimuth.add(angle);
+        System.out.println("Ellipsis rotation, after: " + this.azimuth.getDegree());
     }
 
 

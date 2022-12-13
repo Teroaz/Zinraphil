@@ -2,14 +2,20 @@ package fr.zinraphil.utils;
 
 import fr.zinraphil.models.geometry.Point;
 
+import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Provides utility methods for working with {@link JFrame} objects.
+ */
 public class JFrameUtils {
 
     /**
-     * @param width  La largeur de la fenêtre
-     * @param height La hauteur de la fenêtre
-     * @return Les coordonnées pour placer la fenêtre au centre de l'écran
+     * Returns the coordinates at which a frame of the specified size should be centered on the screen.
+     *
+     * @param width  The width of the frame.
+     * @param height The height of the frame.
+     * @return The coordinates at which the frame should be centered on the screen.
      */
     public static Point centerFrameCoords(int width, int height) {
         GraphicsDevice ge = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
