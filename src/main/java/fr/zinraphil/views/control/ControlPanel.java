@@ -10,6 +10,7 @@ import fr.zinraphil.models.patchwork.Image;
 import fr.zinraphil.models.transformations.IHomothethy;
 import fr.zinraphil.models.transformations.IRotation;
 import fr.zinraphil.models.transformations.ITranslation;
+import fr.zinraphil.views.fresco.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,6 +64,8 @@ public class ControlPanel extends JPanel {
         this.add(transformationsPanel);
 
         table = new JTableShape(new ModelShape());
+        table.setAutoCreateRowSorter(true);
+        table.getScrollPane().setVisible(false);
         this.add(table.getScrollPane());
     }
 
@@ -115,7 +118,6 @@ public class ControlPanel extends JPanel {
                 this.onShapeClick(button);
             }
 
-            table.getModelShape().setShapes(selectedImage.getShapes());
         }
         this.updateUI();
     }
@@ -129,12 +131,15 @@ public class ControlPanel extends JPanel {
             selectAnImageLabel.setVisible(true);
             shapesPanel.setVisible(false);
             transformationsPanel.setVisible(false);
-            table.setVisible(false);
+            table.getScrollPane().setVisible(false);
         } else {
+            ImagePanel currentImagePanel = ImageController.getInstance().getCurrentImagePanel();
+            Image currentImage = currentImagePanel.getImage();
+            table.getModelShape().setShapes(currentImage.getShapes());
             selectAnImageLabel.setVisible(false);
             shapesPanel.setVisible(true);
             transformationsPanel.setVisible(true);
-            table.setVisible(true);
+            table.getScrollPane().setVisible(true);
         }
 
     }

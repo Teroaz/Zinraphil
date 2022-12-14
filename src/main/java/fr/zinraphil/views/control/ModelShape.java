@@ -4,6 +4,7 @@ import fr.zinraphil.models.geometry.Shape;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class ModelShape extends DefaultTableModel {
 
@@ -19,9 +20,12 @@ public class ModelShape extends DefaultTableModel {
         this.shapes = shapes;
         setRowCount(shapes.size());
 
-
-
-        setValueAt("test", 1, 1);
+        for (int i = 0; i < shapes.size(); i++) {
+            Shape shape = shapes.stream().toList().get(i);
+            setValueAt(shape.getClass().getSimpleName(), i, 0);
+            setValueAt(shape.getArea(), i, 1);
+            setValueAt(shape.getPerimeter(), i, 2);
+        }
     }
 
     public static String[] getColumnNames() {
