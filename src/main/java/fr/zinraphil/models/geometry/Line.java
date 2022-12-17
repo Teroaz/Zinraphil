@@ -97,19 +97,21 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
     public void applyRotation(Angle angle) {
         Coordinates coordinates = new Coordinates();
 
-        int x0 = coordinates.transformCoordinates(p1.getX());
-        int y0 = coordinates.transformCoordinates(p1.getY());
+        int centerX = coordinates.transformCoordinates(this.p1.getX());
+        int centerY = coordinates.transformCoordinates(this.p1.getY());
 
-        int x1 = coordinates.transformCoordinates(p2.getX());
-        int y1 = coordinates.transformCoordinates(p2.getY());
+        int point2x = coordinates.transformCoordinates(this.p2.getX());
+        int point2y = coordinates.transformCoordinates(this.p2.getY());
 
-        double x = x1 - x0;
-        double y = y1 - y0;
-        double newX = x * cos(angle.getDegree()) - y * sin(angle.getDegree());
-        double newY = x * sin(angle.getDegree()) + y * cos(angle.getDegree());
+        // todo get reel radian
+        double x = angle.getRadian();
 
-        p2.setX(coordinates.revertCoordinates((int) newX + x0));
-        p2.setY(coordinates.revertCoordinates((int) newY + y0));
+
+        double newX = Math.cos(x) * (point2x - centerX) - Math.sin(x) * (point2y - centerY) + centerX;
+        double newY = Math.sin(x) * (point2x - centerX) + Math.cos(x) * (point2y - centerY) + centerY;
+
+        p2.setX(coordinates.revertCoordinates((int) newX));
+        p2.setY(coordinates.revertCoordinates((int) newY));
     }
 
     @Override

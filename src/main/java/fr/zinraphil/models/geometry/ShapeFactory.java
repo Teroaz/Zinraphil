@@ -55,7 +55,7 @@ public class ShapeFactory {
             }
 
             Polygon polygon = new Polygon(points);
-            polygon.applyRotation(new Angle(AngleType.DEGREE, random.nextInt(0, 360)));
+            //polygon.applyRotation(new Angle(AngleType.DEGREE, random.nextInt(0, 360)));
             polygon.applyTranslation(random.nextInt(IMAGE_SIZE), random.nextInt(IMAGE_SIZE));
             return new Polygon(points);
         }
