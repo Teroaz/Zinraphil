@@ -78,23 +78,26 @@ public class ControlPanel extends JPanel {
 
         switch (button.getText()) {
             case "Rotation":
-                Angle angle = new Angle(AngleType.DEGREE, 90); //new Angle(AngleType.DEGREE, new Random().nextInt(360));
+                Angle angle = new Angle(AngleType.DEGREE, new Random().nextInt(360));
                 shapes.stream().filter(shape -> shape instanceof IRotation).forEach(shape -> ((IRotation) shape).applyRotation(angle));
                 break;
             case "Translation":
                 shapes.stream().filter(shape -> shape instanceof ITranslation).forEach(shape -> ((ITranslation) shape).applyTranslation(10, 10));
                 break;
             case "Symétrie axiale":
-//  w              shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).forEach(shape -> ((Isymetrieaxiale) shape).applyAxialSymmetry(Axis.X));
+                //TODO Rajouter sym axial & centrale
+//                shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).forEach(shape -> ((Isymetrieaxiale) shape).applyAxialSymmetry(Axis.X));
                 break;
             case "Symétrie centrale":
 //                shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).forEach(shape -> ((ICentralSymmetry) shape).applyCentralSymmetry());
                 break;
             case "Homothétie":
-                // TODO Implement this transformation
+                // TODO Implement this transformation in random
                 shapes.stream().filter(shape -> shape instanceof IHomothethy).forEach(shape -> ((IHomothethy) shape).applyHomothety(0.6f));
                 break;
         }
+
+        this.updateUI();
 
     }
 

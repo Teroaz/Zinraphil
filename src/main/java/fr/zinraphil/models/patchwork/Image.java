@@ -86,6 +86,35 @@ public class Image {
     }
 
     /**
+     * Returns the area of the image.
+     *
+     * @return the area of the image
+     */
+    public double getArea() {
+        return shapes.stream().mapToDouble(Shape::getArea).sum();
+    }
+
+    /**
+     * Returns the perimeter of the image.
+     *
+     * @return the perimeter of the image
+     */
+    public double getPerimeter() {
+        return shapes.stream().mapToDouble(Shape::getPerimeter).sum();
+    }
+
+    /**
+     * Clones the image.
+     *
+     * @return a new Image object with the same width, height, and shapes as the original image
+     */
+    public Image clone() {
+        Image image = new Image(width, height);
+        shapes.forEach(image::addShape);
+        return image;
+    }
+
+    /**
      * Returns a string representation of the image.
      *
      * @return a string representation of the image

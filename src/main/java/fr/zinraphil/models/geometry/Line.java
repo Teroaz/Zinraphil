@@ -103,9 +103,7 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         int point2x = coordinates.transformCoordinates(this.p2.getX());
         int point2y = coordinates.transformCoordinates(this.p2.getY());
 
-        // todo get reel radian
         double x = angle.getRadian();
-
 
         double newX = Math.cos(x) * (point2x - centerX) - Math.sin(x) * (point2y - centerY) + centerX;
         double newY = Math.sin(x) * (point2x - centerX) + Math.cos(x) * (point2y - centerY) + centerY;

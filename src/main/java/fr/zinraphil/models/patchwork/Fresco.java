@@ -37,6 +37,24 @@ public class Fresco {
     }
 
     /**
+     * Calculates the total area of the fresco.
+     *
+     * @return the total area of the fresco
+     */
+    public double getArea() {
+        return images.values().stream().mapToDouble(Image::getArea).sum();
+    }
+
+    /**
+     * Calculates the total perimeter of the fresco.
+     *
+     * @return the total perimeter of the fresco
+     */
+    public double getPerimeter() {
+        return images.values().stream().mapToDouble(Image::getPerimeter).sum();
+    }
+
+    /**
      * Returns a string representation of the fresco.
      *
      * @return a string representation of the fresco

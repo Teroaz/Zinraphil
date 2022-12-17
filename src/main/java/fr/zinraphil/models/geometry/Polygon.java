@@ -18,6 +18,7 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
         return points;
     }
 
+
     public double getArea() {
         // Calculate the area of a polygon using the Shoelace formula
         // https://en.wikipedia.org/wiki/Shoelace_formula

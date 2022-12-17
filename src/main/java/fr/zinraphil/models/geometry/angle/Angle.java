@@ -12,7 +12,7 @@ public class Angle implements Comparable<Angle> {
     /**
      * The value of the angle.
      */
-    private int value;
+    private double value;
 
     /**
      * Creates a new angle with the specified type and value.
@@ -20,7 +20,7 @@ public class Angle implements Comparable<Angle> {
      * @param type  The type of the angle (radians or degrees).
      * @param value The value of the angle.
      */
-    public Angle(AngleType type, int value) {
+    public Angle(AngleType type, double value) {
         this.type = type;
         this.value = value;
     }
@@ -30,9 +30,9 @@ public class Angle implements Comparable<Angle> {
      *
      * @return The value of the angle in radians.
      */
-    public int getRadian() {
+    public double getRadian() {
         if (type == AngleType.RADIAN) return value;
-        return (int) Math.toRadians(value);
+        return Math.toRadians(value);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Angle implements Comparable<Angle> {
      * @return The value of the angle in degrees.
      */
     public int getDegree() {
-        if (type == AngleType.DEGREE) return value;
+        if (type == AngleType.DEGREE) return (int) value;
         return (int) Math.toDegrees(value);
     }
 
@@ -54,7 +54,7 @@ public class Angle implements Comparable<Angle> {
      */
     @Override
     public int compareTo(Angle o) {
-        return this.getRadian() - o.getRadian();
+        return (int) (this.getRadian() - o.getRadian());
     }
 
     /**
