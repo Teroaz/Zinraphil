@@ -4,6 +4,7 @@ import fr.zinraphil.models.transformations.Axis;
 import fr.zinraphil.models.transformations.IAxialSymmetry;
 import fr.zinraphil.models.transformations.ICentralSymmetry;
 import fr.zinraphil.models.transformations.ITranslation;
+import fr.zinraphil.utils.Coordinates;
 
 import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 
@@ -94,10 +95,18 @@ public class Point implements Comparable<Point>, ITranslation, IAxialSymmetry, I
      */
     @Override
     public void applyCentralSymmetry(Point p) {
-        int x1 = p.getX() + (p.getX() - this.x);
-        int y1 = p.getY() + (p.getY() - this.y);
-        this.x = x1;
-        this.y = y1;
+        Coordinates coordinates = new Coordinates();
+        int x1 = coordinates.transformCoordinates(this.x);
+        int y1 = coordinates.transformCoordinates(this.y);
+
+        int pX = p.getX();
+        int pY = p.getY();
+
+        int x2 = pX + (pX - x1);
+        int y2 = pY + (pY - y1);
+
+        this.x = coordinates.revertCoordinates(x2);
+        this.y = coordinates.revertCoordinates(y2);
     }
 
     /**

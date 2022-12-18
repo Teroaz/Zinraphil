@@ -5,7 +5,6 @@ import fr.zinraphil.models.transformations.*;
 
 import java.awt.*;
 
-import static fr.zinraphil.controllers.ZinraphilController.IMAGE_SIZE;
 import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
 
 /**
@@ -14,7 +13,7 @@ import static fr.zinraphil.models.geometry.angle.AngleType.DEGREE;
  * {@link IDrawable}, {@link ITranslation}, {@link IHomothethy},
  * and {@link ICentralSymmetry} interfaces.
  */
-public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation, IHomothethy, ICentralSymmetry, IDrawable {
+public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation, IHomothethy, ICentralSymmetry, IAxialSymmetry, IDrawable {
 
     /**
      * The center point of the ellipsis.
@@ -187,29 +186,14 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
     }
 
     /**
-     * Applies an axial symmetry transformation to the ellipsis with respect to the given axis.
-     *
-     * @param axis the axis to reflect the ellipsis over
-     */
-    public void symetrieaxiale(Axis axis) {
-        if (axis == Axis.X) {
-            this.center.setY(IMAGE_SIZE - this.center.getY());
-        } else {
-            this.center.setX(IMAGE_SIZE - this.center.getX());
-        }
-    }
-
-    /**
      * Returns central symmetry transformation to the ellipsis with respect to the given point.
      *
      * @param p the point to reflect the ellipsis over
      */
     @Override
     public void applyCentralSymmetry(Point p) {
-        int x1 = p.getX() + (p.getX() - center.getX());
-        int y1 = p.getY() + (p.getY() - center.getY());
-        this.center.setX(x1);
-        this.center.setY(y1);
+        this.center.applyCentralSymmetry(p);
+        this.applyRotation(new Angle(DEGREE, 180));
 
     }
 
@@ -221,5 +205,20 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
                 ", radiusY=" + radiusY +
                 ", azimuth=" + azimuth +
                 '}';
+    }
+
+    /**
+     * Applies an axial symmetry transformation to the ellipsis with respect to the given axis.
+     *
+     * @param axis the axis to reflect the ellipsis over
+     */
+    @Override
+    public void applyAxialSymmetry(Axis axis) {
+        this.center.applyAxialSymmetry(axis);
+        if (axis == Axis.X) {
+            this.azimuth = this.azimuth.add(new Angle(DEGREE, this.azimuth.getDegree() * 2));
+        } else {
+            this.azimuth = this.azimuth.add(new Angle(DEGREE, (180 - this.azimuth.getDegree() * 2)));
+        }
     }
 }

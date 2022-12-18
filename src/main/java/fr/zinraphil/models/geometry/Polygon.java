@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 /**
  * Represents a polygon on a two-dimensional plane.
- *
  */
 public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, ICentralSymmetry, IDrawable, IHomothethy, IAxialSymmetry {
 
@@ -38,7 +37,7 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
      *
      * @return the center point of the polygon
      */
-    public Point getCenter () {
+    public Point getCenter() {
         double x = 0;
         double y = 0;
         for (Point p : points) {
@@ -106,9 +105,9 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     /**
-
-     Rotates the polygon around its center by a given angle.
-     @param angle the angle to rotate the polygon by
+     * Rotates the polygon around its center by a given angle.
+     *
+     * @param angle the angle to rotate the polygon by
      */
     @Override
     public void applyRotation(Angle angle) {
@@ -123,10 +122,10 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     /**
-
-     Translates the polygon by a given amount in the x and y direction.
-     @param deltaX the amount to translate the polygon in the x direction
-     @param deltaY the amount to translate the polygon in the y direction
+     * Translates the polygon by a given amount in the x and y direction.
+     *
+     * @param deltaX the amount to translate the polygon in the x direction
+     * @param deltaY the amount to translate the polygon in the y direction
      */
     @Override
     public void applyTranslation(int deltaX, int deltaY) {
@@ -137,9 +136,9 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
 
 
     /**
-
-     Applies a homothety transformation to the polygon.
-     @param k the scale factor to apply to the x and y coordinates of each point in the polygon
+     * Applies a homothety transformation to the polygon.
+     *
+     * @param k the scale factor to apply to the x and y coordinates of each point in the polygon
      */
     @Override
     public void applyHomothety(float k) {
@@ -150,9 +149,9 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     /**
-
-     Applies an axial symmetry transformation to the polygon.
-     @param axis the axis of symmetry to apply to the polygon
+     * Applies an axial symmetry transformation to the polygon.
+     *
+     * @param axis the axis of symmetry to apply to the polygon
      */
     @Override
     public void applyAxialSymmetry(Axis axis) {
@@ -162,24 +161,21 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
     }
 
     /**
-
-     Applies central symmetry to the polygon about the given point.
-     @param p The point about which to apply central symmetry.
+     * Applies central symmetry to the polygon about the given point.
+     *
+     * @param p The point about which to apply central symmetry.
      */
     @Override
     public void applyCentralSymmetry(Point p) {
         for (Point p1 : this.points) {
-            int x1 = p.getX() + (p.getX() - p1.getX());
-            int y1 = p.getY() + (p.getY() - p1.getY());
-            p1.setX(x1);
-            p1.setY(y1);
+            p1.applyCentralSymmetry(p);
         }
     }
 
     /**
-
-     Draws the polygon on the given graphics context.
-     @param g The graphics context on which to draw the polygon.
+     * Draws the polygon on the given graphics context.
+     *
+     * @param g The graphics context on which to draw the polygon.
      */
     @Override
     public void draw(Graphics g) {

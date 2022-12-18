@@ -1,8 +1,6 @@
 package fr.zinraphil.models.geometry;
 
-import fr.zinraphil.models.transformations.ICentralSymmetry;
-import fr.zinraphil.models.transformations.IHomothethy;
-import fr.zinraphil.models.transformations.ITranslation;
+import fr.zinraphil.models.transformations.*;
 
 import java.awt.*;
 
@@ -12,7 +10,7 @@ import java.awt.*;
  * {@link IDrawable}, {@link ITranslation}, {@link IHomothethy},
  * and {@link ICentralSymmetry} interfaces.
  */
-public class Circle extends Shape<Circle> implements IDrawable, ITranslation, IHomothethy, ICentralSymmetry {
+public class Circle extends Shape<Circle> implements IDrawable, ITranslation, IHomothethy, ICentralSymmetry, IAxialSymmetry {
 
     /**
      * The center of this circle.
@@ -126,10 +124,7 @@ public class Circle extends Shape<Circle> implements IDrawable, ITranslation, IH
      */
     @Override
     public void applyCentralSymmetry(Point p) {
-        int x1 = p.getX() + (p.getX() - center.getX());
-        int y1 = p.getY() + (p.getY() - center.getY());
-        this.center.setX(x1);
-        this.center.setY(y1);
+        this.center.applyCentralSymmetry(p);
     }
 
     /**
@@ -143,5 +138,15 @@ public class Circle extends Shape<Circle> implements IDrawable, ITranslation, IH
                 "center=" + center +
                 ", radius=" + radius +
                 '}';
+    }
+
+    /**
+     * Applies an axial symmetry transformation of the axis.
+     *
+     * @param axis the axis along which to apply the symmetry
+     */
+    @Override
+    public void applyAxialSymmetry(Axis axis) {
+        this.center.applyAxialSymmetry(axis);
     }
 }

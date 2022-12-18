@@ -1,0 +1,10 @@
+fr.zinraphil
+fr.zinraphil.controllers
+fr.zinraphil.models.geometry
+fr.zinraphil.models.geometry.angle
+fr.zinraphil.models.patchwork
+fr.zinraphil.models.transformations
+fr.zinraphil.utils
+fr.zinraphil.views
+fr.zinraphil.views.control
+fr.zinraphil.views.fresco

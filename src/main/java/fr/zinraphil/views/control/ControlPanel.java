@@ -99,19 +99,19 @@ public class ControlPanel extends JPanel {
                 System.out.println("[ControlPanel] Translation of (" + deltaX + ", " + deltaY + ") on " + shapes.size() + " shapes");
                 shapes.forEach(shape -> ((ITranslation) shape).applyTranslation(deltaX, deltaY));
                 break;
-            case "Symétrie axiale":
+            case "Sym. axiale":
                 shapes = shapes.stream().filter(shape -> shape instanceof IAxialSymmetry).toList();
                 Axis axis = new Random().nextBoolean() ? Axis.X : Axis.Y;
 
                 System.out.println("[ControlPanel] Axial symmetry on " + axis + " axis on " + shapes.size() + " shapes");
                 shapes.forEach(shape -> ((IAxialSymmetry) shape).applyAxialSymmetry(axis));
                 break;
-            case "Symétrie centrale":
+            case "Sym. centrale":
                 shapes = shapes.stream().filter(shape -> shape instanceof ICentralSymmetry).toList();
-                Point center = new Point(new Random().nextInt(-20, 20), new Random().nextInt(-20, 20));
+                Point center = new Point(new Random().nextInt(-10, 10), new Random().nextInt(-10, 10));
 
                 System.out.println("[ControlPanel] Central symmetry on " + shapes.size() + " shapes around " + center);
-                shapes.forEach(shape -> ((ICentralSymmetry) shape).applyCentralSymmetry(new Point(0, 0)));
+                shapes.forEach(shape -> ((ICentralSymmetry) shape).applyCentralSymmetry(center));
                 break;
             case "Homothétie":
                 shapes = shapes.stream().filter(shape -> shape instanceof IHomothethy).toList();

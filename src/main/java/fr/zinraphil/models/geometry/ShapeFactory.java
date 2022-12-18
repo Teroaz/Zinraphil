@@ -23,14 +23,11 @@ public class ShapeFactory {
 
         if (shapeClass == Ellipsis.class) {
             Random random = new Random();
-            int radius = random.nextInt(5, 50);
-
             int radiusX = random.nextInt(5, 50);
             int radiusY = random.nextInt(5, 50);
 
-//            int azimuth = random.nextInt(0, 360);
-//            return new Ellipsis(new Point(random.nextInt(IMAGE_SIZE - radius), random.nextInt(IMAGE_SIZE - radius)), radiusX, radiusY, new Angle(AngleType.DEGREE, azimuth));
-            return new Ellipsis(new Point(random.nextInt(radiusX, IMAGE_SIZE - radiusX), random.nextInt(radiusY, IMAGE_SIZE - radiusY)), radiusX, radiusY, new Angle(AngleType.DEGREE, 90));
+            int azimuth = random.nextInt(0, 360);
+            return new Ellipsis(new Point(random.nextInt(radiusX, IMAGE_SIZE - radiusX), random.nextInt(radiusY, IMAGE_SIZE - radiusY)), radiusX, radiusY, new Angle(AngleType.DEGREE, azimuth));
         }
 
         if (shapeClass == Line.class) {

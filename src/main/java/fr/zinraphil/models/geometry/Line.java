@@ -161,14 +161,8 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
      */
     @Override
     public void applyCentralSymmetry(Point p) {
-        int x1 = p.getX() + (p.getX() - p1.getX());
-        int y1 = p.getY() + (p.getY() - p1.getY());
-        int x2 = p.getX() + (p.getX() - p2.getX());
-        int y2 = p.getY() + (p.getY() - p2.getY());
-        p1.setX(x1);
-        p1.setY(y1);
-        p2.setX(x2);
-        p2.setY(y2);
+        this.p1.applyCentralSymmetry(p);
+        this.p2.applyCentralSymmetry(p);
     }
 
     /**
