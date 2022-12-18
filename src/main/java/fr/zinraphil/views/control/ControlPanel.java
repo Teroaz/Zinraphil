@@ -115,7 +115,7 @@ public class ControlPanel extends JPanel {
                 break;
             case "Homothétie":
                 shapes = shapes.stream().filter(shape -> shape instanceof IHomothethy).toList();
-                float scale = new Random().nextFloat(-1, 1);
+                float scale = new Random().nextFloat(0.4f, 1);
 
                 System.out.println("[ControlPanel] Homothety of " + scale + " on " + shapes.size() + " shapes");
                 shapes.forEach(shape -> ((IHomothethy) shape).applyHomothety(scale));
@@ -175,6 +175,8 @@ public class ControlPanel extends JPanel {
             Fresco fresco = FrescoController.getInstance().getFrescoPanel().getFresco();
             System.out.println("[ControlPanel] Fresco informations => area : " + fresco.getArea() + " | perimeter : " + fresco.getPerimeter());
             System.out.println("[ControlPanel] Image informations => area : " + currentImage.getArea() + " | perimeter : " + currentImage.getPerimeter() + " | shapes : " + currentImage.getShapes().size());
+            System.out.println("[ControlPanel] Shapes in current image sorted by perimeter : " + currentImage.sortPerimeter());
+            System.out.println("[ControlPanel] Shapes in current image sorted by area : " + currentImage.sortArea());
 
             table.getModelShape().setShapes(currentImage.getShapes());
             selectAnImageLabel.setVisible(false);
