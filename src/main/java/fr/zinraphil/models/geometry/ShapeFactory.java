@@ -13,6 +13,8 @@ public class ShapeFactory {
 
     public static Shape generateShape(Class shapeClass) {
 
+        System.out.println("[ShapeFactory] Generating shape of type " + shapeClass.getSimpleName());
+
         if (shapeClass == Circle.class) {
             Random random = new Random();
             int radius = random.nextInt(5, 50);

@@ -31,7 +31,12 @@ public class FrescoPanel extends JPanel {
 
         this.fresco = fresco;
 
+        System.out.println("> Instantiating FrescoPanel for the fresco ");
+
+        System.out.println("[FrescoPanel] Adding " + fresco.getImages().size() + " image panels");
         fresco.getImages().forEach((point, image) -> {
+
+            System.out.println("[FrescoPanel] Adding image panel for at " + point);
             ImagePanel imagePanel = new ImagePanel(image);
             imagePanel.addMouseListener(ImageController.getInstance());
             imagePanel.addMouseMotionListener(ImageController.getInstance());
@@ -39,7 +44,9 @@ public class FrescoPanel extends JPanel {
             this.imagePanels.add(imagePanel);
         });
 
+        System.out.println("[FrescoPanel] Adding " + imagePanels.size() + " image panels");
         this.imagePanels.forEach(this::add);
+
     }
 
     /**

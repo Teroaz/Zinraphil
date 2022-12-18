@@ -20,7 +20,6 @@ public class ShapeRenderer extends JLabel implements TableCellRenderer {
         } else if (value instanceof Double) {
             setText(String.format("%.2f", value));
         }
-//        System.out.println("need to render " + shape);
         return this;
     }
 }

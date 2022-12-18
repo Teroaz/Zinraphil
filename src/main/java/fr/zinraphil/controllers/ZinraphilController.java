@@ -30,6 +30,7 @@ public class ZinraphilController {
     public ZinraphilController() {
         instance = this;
 
+        System.out.println("> Instantiating ZinraphilController");
         zinraphilFrame = new ZinraphilFrame();
     }
 

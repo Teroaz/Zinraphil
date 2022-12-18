@@ -24,27 +24,30 @@ public class ZinraphilFrame extends JFrame {
     public ZinraphilFrame() {
         super("Fresco");
 
+        System.out.println("> Instantiating ZinraphilFrame");
+
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         int width = gd.getDisplayMode().getWidth() - 50;
         int height = gd.getDisplayMode().getHeight() - 50;
 
+        System.out.println("[ZinraphilFrame] Getting screen size: " + width + "x" + height);
 
         WIDTH = width;
         HEIGHT = height - (height % IMAGE_SIZE);
 
-        System.out.println("Resolution used: " + WIDTH + "x" + HEIGHT);
+        System.out.println("[ZinraphilFrame] Setting frame size: " + WIDTH + "x" + HEIGHT);
 
         try {
+            System.out.println("[ZinraphilFrame] Setting look and feel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             this.setResizable(false);
             this.setLayout(null);
             this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             this.setUndecorated(true);
 
-            System.out.println("Frame size: " + this.getWidth() + "x" + this.getHeight());
-
             Point centerFrameCoords = JFrameUtils.centerFrameCoords(WIDTH, HEIGHT);
             this.setLocation(centerFrameCoords.getX(), centerFrameCoords.getY());
+            System.out.println("[ZinraphilFrame] Placing the frame at middle of the screen: " + centerFrameCoords.getX() + "x" + centerFrameCoords.getY());
 
             Fresco fresco = new Fresco();
             for (int i = 0; i < HEIGHT; i += IMAGE_SIZE) {
@@ -54,6 +57,7 @@ public class ZinraphilFrame extends JFrame {
                 }
             }
 
+            System.out.println("[ZinraphilFrame] Setting up all the controllers");
             new ImageController();
 
             FrescoPanel frescoPanel = new FrescoPanel(fresco);

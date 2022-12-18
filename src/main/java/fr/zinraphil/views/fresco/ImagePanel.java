@@ -24,8 +24,11 @@ public class ImagePanel extends JPanel {
     public ImagePanel(Image image) {
         super();
         this.image = image;
+
         this.setSize(image.getWidth(), image.getHeight());
         this.setBackground(new Color((int) (Math.random() * 0x1000000)));
+
+        System.out.println("> Instantiating ImagePanel at size : " + image.getWidth() + "x" + image.getHeight() + " with given image : " + image);
     }
 
     /**

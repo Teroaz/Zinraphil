@@ -39,15 +39,12 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
     /**
      * Constructs a new ellipsis with the given center point and radii.
      *
-     * @param center the center point of the ellipsis
+     * @param center  the center point of the ellipsis
      * @param radiusX the radius of the ellipsis along the x-axis
      * @param radiusY the radius of the ellipsis along the y-axis
      * @throws IllegalArgumentException if radiusX and radiusY are equal
      */
     public Ellipsis(Point center, int radiusX, int radiusY) {
-        if (radiusX == radiusY) {
-            throw new IllegalArgumentException("The radiusX and radiusY must be different");
-        }
         this.center = center;
         this.radiusX = radiusX;
         this.radiusY = radiusY;
@@ -56,7 +53,7 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
     /**
      * Constructs a new ellipsis with the given center point, radii, and azimuth angle.
      *
-     * @param center the center point of the ellipsis
+     * @param center  the center point of the ellipsis
      * @param radiusX the radius of the ellipsis along the x-axis
      * @param radiusY the radius of the ellipsis along the y-axis
      * @param azimuth the orientation of the ellipsis in the coordinate system
@@ -123,7 +120,7 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
 
     /**
      * Compares this ellipsis to another shape.
-     *
+     * <p>
      * The comparison is based on the class name, radiusX, radiusY, and azimuth angle of the ellipsis.
      *
      * @param o the shape to compare to
@@ -163,9 +160,7 @@ public class Ellipsis extends Shape<Ellipsis> implements IRotation, ITranslation
     @Override
     public void applyRotation(Angle angle) {
         if (angle.getDegree() == 0) return;
-        System.out.println("Ellipsis rotation, before: " + this.azimuth.getDegree());
         this.azimuth = this.azimuth.add(angle);
-        System.out.println("Ellipsis rotation, after: " + this.azimuth.getDegree());
     }
 
 

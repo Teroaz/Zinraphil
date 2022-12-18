@@ -27,6 +27,8 @@ public class FrescoController {
      */
     public FrescoController(FrescoPanel frescoPanel) {
         instance = this;
+
+        System.out.println("> Instantiating FrescoController");
         this.frescoPanel = frescoPanel;
     }
 

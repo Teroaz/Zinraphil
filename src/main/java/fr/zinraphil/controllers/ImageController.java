@@ -23,6 +23,7 @@ public class ImageController implements MouseListener, MouseMotionListener {
      * Constructs a new ImageController and sets the instance variable to this object.
      */
     public ImageController() {
+        System.out.println("> Instantiating ImageController");
         instance = this;
     }
 
@@ -56,6 +57,7 @@ public class ImageController implements MouseListener, MouseMotionListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
+            System.out.println("[ImageController] Left mouse button pressed on " + e.getSource());
             currentImagePanel = (ImagePanel) e.getSource();
         }
 

@@ -27,6 +27,7 @@ public class ControlController {
     public ControlController(ControlPanel controlPanel) {
         instance = this;
 
+        System.out.println("> Instantiating ControlController");
         this.controlPanel = controlPanel;
     }
 
