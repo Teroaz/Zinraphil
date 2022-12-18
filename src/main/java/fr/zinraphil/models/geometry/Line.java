@@ -17,6 +17,7 @@ import static java.lang.Math.sin;
  */
 public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslation, ICentralSymmetry, IHomothethy, IAxialSymmetry {
 
+    // Instance variables for the start and end points of the line.
     private Point p1;
     private Point p2;
 
@@ -77,6 +78,13 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
     }
 
 
+    /**
+     * Compares this line to another shape. If the other shape is not a line, the comparison is based on the class names.
+     * If the other shape is a line, the comparison is based on the start points, then the end points.
+     *
+     * @param o the other shape to compare to
+     * @return a negative integer, zero, or a positive integer as this line is less than, equal to, or greater than the other shape
+     */
     @Override
     public int compareTo(Shape o) {
         if (this.getClass() != o.getClass()) return this.getClass().getName().compareTo(o.getClass().getName());
@@ -86,13 +94,23 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         return this.p2.compareTo(l.getP2());
     }
 
-
+    /**
+     * Applies a translation to the line by applying the translation to each of its end points.
+     *
+     * @param deltaX the amount to translate in the x direction
+     * @param deltaY the amount to translate in the y direction
+     */
     public void applyTranslation(int deltaX, int deltaY) {
         p1.applyTranslation(deltaX, deltaY);
         p2.applyTranslation(deltaX, deltaY);
     }
 
 
+    /**
+     * Applies a rotation to the line by rotating its end point around the start point.
+     *
+     * @param angle the angle of rotation
+     */
     @Override
     public void applyRotation(Angle angle) {
         Coordinates coordinates = new Coordinates();
@@ -112,6 +130,11 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         p2.setY(coordinates.revertCoordinates((int) newY));
     }
 
+    /**
+     * Applies a homothety to the line by scaling its end points.
+     *
+     * @param k the scaling factor
+     */
     @Override
     public void applyHomothety(float k) {
         p1.setX((int) (p1.getX() * k));
@@ -120,12 +143,22 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         p2.setY((int) (p2.getY() * k));
     }
 
+    /**
+     * Applies an axial symmetry to the line by reflecting its end points across the given axis.
+     *
+     * @param axis the axis of symmetry
+     */
     @Override
     public void applyAxialSymmetry(Axis axis) {
         this.p1.applyAxialSymmetry(axis);
         this.p2.applyAxialSymmetry(axis);
     }
 
+    /**
+     * Applies a central symmetry to the line by reflecting its end points across the given point.
+     *
+     * @param p the point of symmetry
+     */
     @Override
     public void applyCentralSymmetry(Point p) {
         int x1 = p.getX() + (p.getX() - p1.getX());
@@ -138,6 +171,11 @@ public class Line extends Shape<Line> implements IDrawable, IRotation, ITranslat
         p2.setY(y2);
     }
 
+    /**
+     * Draws the line on the given graphics context.
+     *
+     * @param g the graphics context on which to draw the line
+     */
     @Override
     public void draw(Graphics g) {
         g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
