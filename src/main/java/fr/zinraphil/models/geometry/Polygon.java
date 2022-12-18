@@ -2,9 +2,11 @@ package fr.zinraphil.models.geometry;
 
 import fr.zinraphil.models.geometry.angle.Angle;
 import fr.zinraphil.models.transformations.*;
+import fr.zinraphil.utils.Coordinates;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, ICentralSymmetry, IDrawable, IHomothethy, IAxialSymmetry {
 
@@ -18,6 +20,15 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
         return points;
     }
 
+    public Point getCenter () {
+        double x = 0;
+        double y = 0;
+        for (Point p : points) {
+            x += p.getX();
+            y += p.getY();
+        }
+        return new Point((int) (x / points.size()), (int) (y / points.size()));
+    }
 
     public double getArea() {
         // Calculate the area of a polygon using the Shoelace formula
@@ -59,12 +70,14 @@ public class Polygon extends Shape<Polygon> implements IRotation, ITranslation, 
 
     @Override
     public void applyRotation(Angle angle) {
-        for (int i = 0; i < points.size(); i++) {
-            Point p1 = points.get(i);
-            Point p2 = points.get((i + 1) % points.size());
-            Line line = new Line(p2, p1);
-            line.applyRotation(angle);
+
+        Point center = getCenter();
+
+        for (Point p : points) {
+            Line l = new Line(center, p);
+            l.applyRotation(angle);
         }
+
     }
 
     @Override
